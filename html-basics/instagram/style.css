@@ -1,0 +1,305 @@
+html {
+    font-family: 'Roboto', sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0px;
+    display: flex;
+}
+
+.nav-container {
+    position: fixed;
+    height: 100vh;
+    width: 16%;
+    background-color: #FAFAFA;
+    border-right: 1px solid gray;
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-logo {
+    padding: 5px 0px 20px 0px;
+}
+
+.nav-list-container {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    align-items: start;
+    gap: 20px;
+    font-size: 20px;
+}
+
+.nav-list-item a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    text-decoration: none;
+    color: black;
+}
+
+.nav-list-item i {
+    font-size: 25px;
+}
+
+.nav-list-item a:hover {
+    color: gray;
+}
+
+.nav-img-avatar {
+    width: 25px;
+}
+
+.mobile-nav-btn-container {
+    padding: 15px;
+}
+
+.main-container {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px 25px 25px 70px;
+}
+
+.post-container {
+    width: 50%;
+    box-shadow: -2px 0px 6px 0px rgb(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+    border-radius: 10px;
+}
+
+.author-container {
+    font-size: 22px;
+    margin: 20px 0px;
+}
+
+h5 {
+    margin: 10px 0px;
+    padding-left: 10px;
+}
+
+.location {
+    padding-left: 10px;
+    padding-bottom: 10px;
+}
+
+.img-container img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.links-container {
+    padding: 15px 0px 5px 0px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttons-container button {
+    border: none;
+    background: none;
+    font-size: 25px;
+}
+
+.buttons-container button:hover {
+    color: gray;
+}
+
+.like-btn,
+.comment-btn,
+.share-btn,
+.save-btn {
+    cursor: pointer;
+}
+
+.likes {
+    padding: 0px 0px 15px 8px;
+}
+
+.likes span {
+    font-weight: 700;
+}
+
+.description-container {
+    padding: 0px 8px 15px 8px;
+
+}
+
+.comment-container {
+    padding: 0px 0px 10px 8px;
+}
+
+.comment-container p {
+    word-wrap: break-word;
+}
+
+.form-container {
+    display: flex;
+    margin: 15px 5px 25px 5px;
+}
+
+.add-comment {
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    flex-grow: 1;
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+
+}
+
+.add-comment-btn {
+    font-size: 20px;
+    border: none;
+    background: none;
+}
+
+.add-comment-btn:hover {
+    cursor: pointer;
+    color: gray;
+}
+
+.hide {
+    display: none;
+}
+
+.liked {
+    color: red;
+}
+
+.unliked {
+    color: black;
+}
+
+@media(max-width: 1300px) {
+    .nav-container {
+        width: 20%;
+    }
+}
+
+@media(max-width: 1050px) {
+    .nav-container {
+        width: 24%;
+    }
+}
+
+@media(max-width: 850px) {
+    .nav-container {
+        display: none;
+    }
+
+    body {
+        flex-direction: column;
+    }
+
+    .main-container {
+        padding: 25px;
+    }
+
+    .mobile-nav-btn-container {
+        display: inline-block;
+    }
+
+    .post-container {
+        width: 70%;
+    }
+
+    .add-comment,
+    .add-comment-btn {
+        font-size: 15px;
+    }
+
+    @media(max-width: 650px) {
+        .form-container {
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .add-comment {
+            width: 100%;
+        }
+
+        .comment-container {
+            flex-direction: column;
+            gap: 0px;
+        }
+
+        .comment-container p {
+            padding-bottom: 10px;
+        }
+    }
+
+    @media(max-width: 370px) {
+        h5 {
+            font-size: 14px;
+        }
+
+        .buttons-container button {
+            font-size: 18px;
+        }
+    }
+
+    @media(max-width: 270px) {
+        .main-container {
+            flex-grow: unset;
+            padding: 0px;
+        }
+
+        .add-comment-btn {
+            font-size: 14px;
+        }
+    }
+
+    @media(max-width: 250px) {
+        .h1-container {
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 17px;
+        }
+
+        .buttons-container button {
+            font-size: 12px;
+        }
+
+        .add-comment-btn {
+            font-size: 12px;
+        }
+    }
+
+    @media(max-width: 200px) {
+        h5 {
+            padding: 0px 0px 0px 5px;
+            font-size: 12px;
+        }
+
+        .location {
+            font-size: 12px;
+            padding-left: 0px;
+        }
+
+        .description-container p {
+            font-size: 10px;
+        }
+
+        .comment-container {
+            font-size: 12px;
+        }
+
+        .comment-container p,
+        .add-comment {
+            font-size: 9px;
+        }
+
+        .buttons-container button {
+            font-size: 9px;
+        }
+
+        .add-comment-btn {
+            font-size: 10px;
+        }
+    }
+}

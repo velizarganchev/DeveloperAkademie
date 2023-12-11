@@ -4,6 +4,10 @@ body {
     color: white;
 }
 
+.mt-16 {
+    margin-top: 16px;
+}
+
 .header-container {
     background-image: url("./img/header.png");
     height: 100vh;
@@ -34,6 +38,7 @@ h1 {
     font-size: 84px;
     margin-block-start: 0;
     margin-block-end: 0;
+    text-align: center;
 }
 
 .nav-link {
@@ -57,17 +62,213 @@ h1 {
     cursor: pointer;
 }
 
-.header-button {
+.button {
     color: white;
     text-decoration: none;
     background-color: #B48A4E;
     padding: 16px;
-    margin-top: 16px;
-    border-radius: 10px;
 }
 
 .header-button:hover {
     background-color: white;
     color: #B48A4E;
     font-weight: bold;
+}
+
+.section-quick-links {
+    background-color: black;
+    padding: 80px 80px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.quick-link {
+    color: #B48A4E;
+    font-weight: 700;
+    font-size: 24px;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 30%;
+}
+
+.quick-link img {
+    width: 100%;
+    aspect-ratio: 1 /1;
+    object-fit: cover;
+}
+
+.section-buy-ticket {
+    background-color: #272727;
+    display: flex;
+    align-items: center;
+}
+
+.section-buy-ticket img {
+    height: 300px;
+}
+
+.festival-info {
+    padding: 40px;
+    flex: 1;
+}
+
+.festival-info h2 {
+    font-weight: 200;
+    margin-block-start: 0;
+}
+
+.separator {
+    background-color: white;
+    width: 1px;
+    height: 200px;
+    margin-right: 10px;
+}
+
+.buy-ticket-container {
+    display: flex;
+    justify-content: center;
+    width: 300px;
+}
+
+.slogan-section {
+    padding: 40px 40px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #B48A4E;
+    text-align: center;
+}
+
+.video-section {
+    background-image: url("./img/bottom.png");
+    height: 600px;
+    background-size: cover;
+    background-position: center;
+}
+
+footer {
+    padding: 40px 40px;
+    background-color: black;
+    display: flex;
+    align-items: flex-end;
+}
+
+.half-width {
+    width: 50%;
+}
+
+.footer-text {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.footer-social {
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: center;
+    gap: 30px;
+}
+
+.footer-social img {
+    width: 35px;
+}
+
+.footer-contact {
+    display: flex;
+}
+
+input {
+    height: 46px;
+    border-width: 0px;
+    flex-grow: 1;
+}
+
+input::placeholder {
+    padding-left: 35px;
+
+}
+
+.button-footer {
+    width: 180px;
+    border-width: 0px;
+    cursor: pointer;
+}
+
+@media(max-width: 1050px) {
+
+    .section-buy-ticket {
+        flex-direction: column;
+    }
+
+    .section-buy-ticket img {
+        width: 100%;
+        object-fit: cover;
+    }
+
+    .separator {
+        display: none;
+    }
+
+    .buy-ticket-container {
+        margin-bottom: 40px;
+    }
+
+    .buy-ticket-container a {
+        width: 100%;
+        text-align: center;
+    }
+
+    .festival-info {
+        text-align: center;
+    }
+
+    .festival-info p {
+        margin-block-start: 0px;
+        margin-block-end: 0px;
+    }
+
+    footer {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .footer-text {
+        font-size: 20px;
+        text-align: center;
+    }
+
+    .footer-social {
+        margin-bottom: 15px;
+    }
+
+    .full-width-mobile {
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 700px) {
+    .hide-mobile {
+        display: none;
+    }
+
+    h1 {
+        font-size: 50px;
+    }
+
+}
+
+@media (max-width: 600px) {
+    .section-quick-links {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .quick-link {
+        width: 100%;
+        margin-top: 30px;
+        gap: 10px;
+    }
 }

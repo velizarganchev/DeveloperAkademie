@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="./img/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100;200;300;400;500;600;700;800&family=Roboto:wght@100;300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <script src="./script.js"></script>
+    <script src="data.js"></script>
+    <script src="./html-templates.js"></script>
+    <script src="https://kit.fontawesome.com/255106e16f.js" crossorigin="anonymous"></script>
+
+    <title>Liferando</title>
+</head>
+
+<body onload="render()">
+    <div id="page" class="page-container ">
+        <div id="pay-overlay"></div>
+        <header class="header-container">
+            <div class="header">
+                <div class="header-back-logo-container">
+                    <a href="/developerAkademie/html-basics/liferando">
+                        <div class="header-back-logo">
+                            <div class="back-container">
+                                <i class="fas fa-chevron-left"></i>
+                            </div>
+                            <div class="logo-container">
+                                <div class="logo-element">
+                                    <img src="./img/logo-liferando.svg" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="header-title-container">
+                    <b class="header-title">
+                        Speisekarte
+                    </b>
+                </div>
+                <div class="header-nav-button-container">
+                    <div class="header-country-icon">
+                        <img src="./img/germany.png " alt="">
+                    </div>
+                    <div class="header-menu-botton-container">
+                        <div class="header-menu-button">
+                            <i class="fa-solid fa-bars"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="main">
+            <div class="left" id="left-element">
+                <div class="header-image"></div>
+                <div class="header-name-image">
+                    <img src="./img/header-logo.avif" alt="">
+                </div>
+                <div class="sections-container">
+                    <section class="heading-section-container">
+                        <div class="heading-section-title-container">
+                            <div class="heading-section-title">
+                                <div class="headin-title">
+                                    <div class="title">
+                                        <h1>Diazo</h1>
+                                    </div>
+                                </div>
+                                <div class="section-icons-container">
+                                    <div class="icons-header-container">
+                                        <span class="icon-header">
+                                            <i class="fa-solid fa-circle-info"></i>
+                                        </span>
+                                    </div>
+                                    <div class="icons-header-container">
+                                        <span class="icon-header">
+                                            <i class="fa-regular fa-heart"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="heading-section-rating-container">
+                                <div class="heading-section-rating">
+                                    <div class="heading-section-rating-element">
+                                        <div class="rating-stars-container">
+                                            <div class="rating-star">
+                                                <span class="gold-star">
+                                                    <i class="fa-solid fa-star"></i>
+                                                </span>
+                                            </div>
+                                            <div class="rating-star">
+                                                <span class="gold-star">
+                                                    <i class="fa-solid fa-star"></i>
+                                                </span>
+                                            </div>
+                                            <div class="rating-star">
+                                                <span class="gold-star">
+                                                    <i class="fa-solid fa-star"></i>
+                                                </span>
+                                            </div>
+                                            <div class="rating-star">
+                                                <span>
+                                                    <i class="fa-regular fa-star"></i>
+                                                </span>
+                                            </div>
+                                            <div class="rating-star">
+                                                <span>
+                                                    <i class="fa-regular fa-star"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="heading-section-rating-action">
+                                        <a href="#">69 Bewertungen</a>
+                                    </div>
+                                </div>
+                                <div class="delivery-time-info-container">
+                                    <div class="delivery-time-info-item"><span><i class="fa-solid fa-lock"></i></span>
+                                    </div>
+                                    <div class="delivery-time-info-item"><span>Min.19.99 $</span></div>
+                                    <div class="delivery-time-info-item"><span>-</span></div>
+                                    <div class="delivery-time-info-item"><span><i
+                                                class="fa-solid fa-bicycle"></i></span>
+                                    </div>
+                                    <div class="delivery-time-info-item"> 2.99 $</div>
+                                </div>
+                            </div>
+                            <div class="responsiv-button-container hide">
+                                <button onclick="openCart()">Cart
+                                </button>
+                            </div>
+                            <div id="stamp-kart" class="stamp-kart-container">
+                                <div class="stamp-kart">
+                                    <div class="stamp-kart-item">
+                                        <i class="fa-solid fa-percent"></i>
+                                    </div>
+                                    <div class="stamp-kart-item">
+                                        <span>Stempelkarte</span>
+                                    </div>
+                                </div>
+                                <div class="stamp-kart-text">
+                                    <span>Mehr erfahren</span>
+                                </div>
+                            </div>
+                            <div class="heading-section-actions-container">
+                                <div class="heading-section-actions">
+                                    <div class="heading-section-action-item">
+                                        <span class="action-item-search">
+                                            <i class="fa-solid fa-magnifying-glass"></i>
+                                        </span>
+                                    </div>
+                                    <div class="heading-section-action-item">
+                                        <span class="action-item-text">
+                                            Beliebt
+                                        </span>
+                                    </div>
+                                    <div class="heading-section-action-item">
+                                        <span class="action-item-text">Action - Garden Feeling</span>
+                                    </div>
+                                    <div class="heading-section-action-item">
+                                        <span class="action-item-text">Angebote</span>
+                                    </div>
+                                    <div class="heading-section-action-item">
+                                        <span class="action-item-text">Salate</span>
+                                    </div>
+                                    <div class="heading-section-action-item">
+                                        <span class="action-item-text">Pizza</span>
+                                    </div>
+                                    <div class="heading-section-action-item">
+                                        <span class="action-item-text">Pizza Cheesy</span>
+                                    </div>
+                                    <div class="heading-section-action-item">
+                                        <span class="action-item-text">Pasta Gratin</span>
+                                    </div>
+                                    <div class="heading-section-action-item">
+                                        <span class="action-item-text">Pasta Gratin</span>
+                                    </div>
+                                    <div class="heading-section-action-item">
+                                        <span class="action-item-arrow">
+                                            <i class="fa-solid fa-chevron-right"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="popular-container">
+                        <div class="popular">
+                            <div class="popular-title">
+                                <h2>Beliebt <i class="fa-solid fa-heart"></i></h2>
+                            </div>
+                            <div id="popular-dish" class="pupular-items-container">
+                            </div>
+                            <div class="section-image-container">
+                                <div class="popular-item piza-image">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="garden-feeling-container">
+                        <div class="garden-feeling">
+                            <div class="popular-title">
+                                <h2>Aktion - Garden Feeling</h2>
+                            </div>
+                            <div id="garden-feeling-dish" class="garden-feeling-items-container">
+                            </div>
+                            <div class="section-image-container">
+                                <div class="popular-item pasta-image">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <section class="impresum-container">
+                    <div class="impresum">
+                        <div class="impresum-title-container">
+                            <div class="impresum-title-icon">
+                                <i class="fa-solid fa-building"></i>
+                            </div>
+                            <div class="impresum-title">
+                                Impresum
+                            </div>
+                        </div>
+                        <div class="impresum-address-container">
+                            <div class="impresum-address-item">
+                                <span>Isa Kocak handelt im Namen von Diazo Greifenhagener 61</span>
+                            </div>
+                            <div class="impresum-address-item">
+                                <span>Greifenhagener Straße 61</span>
+                            </div>
+                            <div class="impresum-address-item">
+                                <span>10437 Berlin</span>
+                            </div>
+                        </div>
+                        <div class="impresum-contact-links">
+                            <div class="impresum-text-row">
+                                <span class="impresum-email">
+                                    <a href="#">Sende uns eine E-Mail</a>
+                                </span>
+                            </div>
+                            <div class="impresum-text-row">
+                                <span>Fax: 0800 202 07 702</span>
+                            </div>
+                        </div>
+                        <div class="impresum-text-row">
+                            <span>Plattform der EU-Kommission zur Online-Streitbeilegung:
+                                https://ec.europa.eu/consumers/odr</span>
+                        </div>
+                        <div class="impresum-line"></div>
+                        <div class="impresum-text-row">
+                            <span class="impresum-end-text">
+                                Wir sind ein professioneller Anbieter. <a href="#">Erfahre mehr</a> darüber, wie wir
+                                gemeinsam
+                                mit Lieferando.de die Verbraucherverantwortung übernehmen.
+                            </span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <div class="right r-hide" id="right-element">
+                <div class="h1-container">
+                    <h2>Warenkorb</h2>
+                </div>
+                <div class="right-container">
+                    <div class="delivery-takeaway-container">
+                        <input id="dt-toggle-on" class="dt-toggle dt-toggle-left" name="dt-toggle" value="false"
+                            type="radio" checked onclick="addChecked('dt-toggle-on')">
+                        <label for="dt-toggle-on" class="dt-label-btn">
+                            <div class="dt-btn-icon">
+                                <i class="fa-solid fa-bicycle"></i>
+                            </div>
+                            <div>
+                                <div class="delivery-text">Liferung</div>
+                                <div class="delivery-time">ab 10-20 min</div>
+                            </div>
+                        </label>
+                        <input id="dt-toggle-off" class="dt-toggle dt-toggle-right" name="dt-toggle" value="true"
+                            type="radio">
+                        <label for="dt-toggle-off" class="dt-label-btn" onclick="addChecked('dt-toggle-off')">
+                            <div class="dt-btn-icon">
+                                <i class="fa-solid fa-person-walking-luggage"></i>
+                            </div>
+                            <div>
+                                <div class="takeaway-text">Abholung</div>
+                                <div class="takeaway-time">15 min</div>
+                            </div>
+                        </label>
+                    </div>
+                    <div id="cart-div-container" class="cart-container">
+                        <div class="cart" id="cart-div">
+                        </div>
+                        <div id="total-amount-div" class="total-amount-container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer-container">
+            <div class="footer-list-container">
+                <div class="footer-list">
+                    <divc class="footer-list-item">
+                        <a href="#">Ein Restaurant empfehlen</a>
+                    </divc>
+                    <divc class="footer-list-item">
+                        <a href="#">Ein Restaurant anmelden</a>
+                    </divc>
+                    <divc class="footer-list-item">
+                        <a href="#">Jobs</a>
+                    </divc>
+                    <divc class="footer-list-item">
+                        <a href="#">AGB</a>
+                    </divc>
+                    <divc class="footer-list-item">
+                        <a href="#">Datenschutzerklärung</a>
+                    </divc>
+                    <divc class="footer-list-item">
+                        <a href="#">Impressum</a>
+                    </divc>
+                    <divc class="footer-list-item">
+                        <a href="#">Verwendung von Cookies</a>
+                    </divc>
+                    <divc class="footer-list-item">
+                        <a href="#">Bug Bounty</a>
+                    </divc>
+                    <divc class="footer-list-item">
+                        <a href="#">Ethik-Hotline</a>
+                    </divc>
+                </div>
+            </div>
+            <div class="footer-title-container">
+                <span>@ 2023 Liferando.de</span>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>

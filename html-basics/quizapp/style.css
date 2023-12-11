@@ -1,0 +1,15 @@
+body {
+    margin: 0px;
+}
+
+.nav-bar-container {
+    height: 30px !important;
+}
+
+.container-fluid {
+    height: 100vh;
+}
+
+.card {
+    width: 25rem;
+}
