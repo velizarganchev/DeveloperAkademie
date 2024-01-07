@@ -38,11 +38,10 @@ class Charcter extends MovableObject {
         '../img/2_character_pepe/5_dead/D-56.png',
         '../img/2_character_pepe/5_dead/D-57.png',
     ];
-
-
     world;
     walking_sound = new Audio('../audio/walking.mp3');
 
+    
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
@@ -88,11 +87,13 @@ class Charcter extends MovableObject {
         return (this.world.keyboard.space || this.world.keyboard.arrowup) && !this.isAboveGround();
     }
 
+
     moveLeft() {
         super.moveLeft();
         this.otherDirection = true;
         this.walking_sound.play();
     }
+
 
     moveRight() {
         super.moveRight();
@@ -100,9 +101,11 @@ class Charcter extends MovableObject {
         this.walking_sound.play();
     }
 
+
     canMoveLeft() {
         return this.world.keyboard.arrowleft && this.x > 0;
     }
+
 
     canMoveRight() {
         return this.world.keyboard.arrowright && this.x < this.world.level.level_end_x;
@@ -119,7 +122,6 @@ class Charcter extends MovableObject {
     takeBottle() {
         if (this.bottles < 100) {
             this.bottles += 10;
-            console.log(this.bottles);
         }
     }
 

@@ -30,6 +30,8 @@ class World {
             if (this.checkThrowObject()) {
                 let bottle = new ThrowableObject(this.character.x, this.character.y);
                 this.bottles.push(bottle);
+                this.character.bottles -= 10;
+                this.bottleStatusBar.setPercentage(this.character.bottles);
             }
         }, 200);
     }
@@ -49,7 +51,15 @@ class World {
                 this.coinsStatusBar.setPercentage(this.character.coins);
             }
 
-        })
+        });
+        this.level.bottles.forEach((bottle) => {
+            if (this.character.isColliding(bottle)) {
+                this.character.takeBottle();
+                this.findIndexOfBottle(bottle.id);
+                this.bottleStatusBar.setPercentage(this.character.bottles);
+            }
+
+        });
     }
 
     findIndexOfCoin(coinId) {
@@ -57,8 +67,14 @@ class World {
         this.level.coins.splice(coinToRemove, 1);
     }
 
+
+    findIndexOfBottle(bottleId) {
+        let bottleToRemove = this.level.bottles.findIndex((b) => b.id === bottleId);
+        this.level.bottles.splice(bottleToRemove, 1);
+    }
+
     checkThrowObject() {
-        return this.keyboard.keyd
+        return this.keyboard.keyd && (this.character.bottles / 10) > 0;
     }
 
     mapObj(obj) {
@@ -106,7 +122,7 @@ class World {
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.bottles)
-        
+
         this.ctx.translate(-this.camera_x, 0);
 
         let self = this;
