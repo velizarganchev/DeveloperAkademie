@@ -1,4 +1,5 @@
 class Coin extends MovableObject {
+    id;
     width = 80;
     height = 100;
     y = 300;
@@ -11,6 +12,7 @@ class Coin extends MovableObject {
     constructor() {
         super().loadImage(this.IMAGES[0]);
         this.loadImages(this.IMAGES);
+        this.id = (Math.random() * 1000).toFixed(0);
         this.x = 500 + Math.random() * 4000;
         this.animate();
     }

@@ -7,7 +7,6 @@ class MovableObject extends DrawableObject {
     acceleration = 2.5;
     energy = 100;
     lastHurt = 0;
-    coins = 0;
 
     applyGravity() {
         setInterval(() => {
@@ -58,12 +57,6 @@ class MovableObject extends DrawableObject {
             this.energy = 0;
         } else {
             this.lastHurt = new Date().getTime();
-        }
-    }
-
-    takeCoin() {
-        if (this.coins < 100) {
-            this.coins += 5;
         }
     }
 

@@ -45,11 +45,17 @@ class World {
         this.level.coins.forEach((coin) => {
             if (this.character.isColliding(coin)) {
                 this.character.takeCoin();
+                this.findIndexOfCoin(coin.id)
                 this.coinsStatusBar.setPercentage(this.character.coins);
             }
+
         })
     }
 
+    findIndexOfCoin(coinId) {
+        let coinToRemove = this.level.coins.findIndex((c) => c.id === coinId);
+        this.level.coins.splice(coinToRemove, 1);
+    }
 
     checkThrowObject() {
         return this.keyboard.keyd
@@ -99,8 +105,8 @@ class World {
         this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.enemies);
-
         this.addObjectsToMap(this.bottles)
+        
         this.ctx.translate(-this.camera_x, 0);
 
         let self = this;
