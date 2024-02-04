@@ -15,12 +15,24 @@
         <h1>El Pollo Loco</h1>
         <div class="canvas-container">
             <div class="start-page">
-                
+                <button class="start-button" id="start-btn">Start Game</button>
+                <div class="icons-container">
+                    <button class="info-btn">
+                        <i class="fa-solid fa-gamepad"></i>
+                    </button>
+                    <button class="mute-btn">
+                        <i class="fa-solid fa-volume-xmark"></i>
+                    </button>
+                    <button class="full-screen-btn">
+                        <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
+                    </button>
+                </div>
             </div>
             <canvas id="canvas" width="720" height="480"></canvas>
         </div>
     </div>
 
+    <script src="https://kit.fontawesome.com/255106e16f.js" crossorigin="anonymous"></script>
     <script src="./models/drawable-object.js"></script>
     <script src="./models/movable-object.class.js"></script>
     <script src="./models/throwable-object.class.js"></script>
