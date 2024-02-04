@@ -20,10 +20,13 @@ class DrawableObject {
     drawFrame(ctx) {
         if (this instanceof Charcter ||
             this instanceof Chicken ||
+            this instanceof SmallChicken ||
+            this instanceof Bottle ||
+            this instanceof Coin ||
             this instanceof EndBoss) {
             ctx.beginPath();
             ctx.lineWidth = '5';
-            ctx.strokeStyle = 'transparent';
+            ctx.strokeStyle = 'red';
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         }

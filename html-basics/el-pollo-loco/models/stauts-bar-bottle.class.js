@@ -10,6 +10,7 @@ class StatusBarBottle extends DrawableObject {
     ];
     percentage = 0;
 
+    
     constructor() {
         super().loadImages(this.IMAGES);
         this.x = 0;
@@ -26,7 +27,6 @@ class StatusBarBottle extends DrawableObject {
         let path = this.IMAGES[index];
         this.img = this.imageCash[path];
     }
-
 
     resolveImageIndex() {
         switch (true) {

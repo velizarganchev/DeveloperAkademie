@@ -6,26 +6,54 @@
 body {
     margin: 0;
     font-family: 'Zabars', 'Arial', 'Helvetica', 'sans-serif';
+    background-image: url('./img/5_background/desert.png');
+    background-position: center;
+    background-size: cover;
+}
+
+.start-page {
+    width: 720px;
+    height: 480px;
+    position: absolute;
+    background-image: url('img/9_intro_outro_screens/start/startscreen_1.png');
+    background-position: center;
+    background-size: 720px 480px;
+    border-radius: 10px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.canvas-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-image: url('./img/5_background/desert.png');
-    background-position: center;
-}
-
-h1 {
-    font-size: 4rem;
-    letter-spacing: 1rem;
 }
 
 canvas {
-    background-color: black;
     display: block;
+    background-color: black;
+    border-radius: 10px;
 }
 
+h1 {
+    font-size: 4.5rem;
+    letter-spacing: 1rem;
+    margin-bottom: 80px;
+}
 
 @media only screen and (max-width: 720px) {
+
+    .canvas-container {
+        width: 100%;
+        justify-content: center;
+        margin-top: 0px;
+    }
+
     h1 {
         font-size: 3rem;
     }
@@ -40,7 +68,10 @@ canvas {
         display: none;
     }
 
-    canvas {
+    canvas,
+    .start-page {
+        width: 100%;
         height: 100vh;
+        border-radius: 0px;
     }
 }

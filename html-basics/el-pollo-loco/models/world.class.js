@@ -4,6 +4,7 @@ class World {
     coinsStatusBar = new StatusBarCoins();
     bottleStatusBar = new StatusBarBottle();
     bottles = [];
+    canTrow = true;
     ctx;
     canvas;
     keyboard;
@@ -22,7 +23,9 @@ class World {
 
     setWorld() {
         this.character.world = this;
+
     }
+
 
     run() {
         setInterval(() => {
@@ -30,11 +33,18 @@ class World {
             if (this.checkThrowObject()) {
                 let bottle = new ThrowableObject(this.character.x, this.character.y);
                 this.bottles.push(bottle);
-                this.character.bottles -= 10;
-                this.bottleStatusBar.setPercentage(this.character.bottles);
+                this.character.bottles.pop();
+                this.bottleStatusBar.setPercentage(this.character.bottles.length * 10);
             }
+            setTimeout(() => {
+                if (this.bottles.length > 0) {
+                    this.bottles[0].isBroken && this.bottles.splice(0, 1);
+                    this.canTrow = true;
+                }
+            }, 3000);
         }, 200);
     }
+
 
 
     checkCollisions() {
@@ -46,35 +56,35 @@ class World {
         });
         this.level.coins.forEach((coin) => {
             if (this.character.isColliding(coin)) {
-                this.character.takeCoin();
-                this.findIndexOfCoin(coin.id)
-                this.coinsStatusBar.setPercentage(this.character.coins);
+                this.character.takeCoin(coin);
+                this.findAndRemoveCoin(coin.id)
+                this.coinsStatusBar.setPercentage(this.character.coins.length * 10);
             }
 
         });
         this.level.bottles.forEach((bottle) => {
             if (this.character.isColliding(bottle)) {
-                this.character.takeBottle();
-                this.findIndexOfBottle(bottle.id);
-                this.bottleStatusBar.setPercentage(this.character.bottles);
+                this.character.takeBottle(bottle);
+                this.findAndremoveBottle(bottle.id);
+                this.bottleStatusBar.setPercentage(this.character.bottles.length * 10);
             }
 
         });
     }
 
-    findIndexOfCoin(coinId) {
+    findAndRemoveCoin(coinId) {
         let coinToRemove = this.level.coins.findIndex((c) => c.id === coinId);
         this.level.coins.splice(coinToRemove, 1);
     }
 
 
-    findIndexOfBottle(bottleId) {
+    findAndremoveBottle(bottleId) {
         let bottleToRemove = this.level.bottles.findIndex((b) => b.id === bottleId);
         this.level.bottles.splice(bottleToRemove, 1);
     }
 
     checkThrowObject() {
-        return this.keyboard.keyd && (this.character.bottles / 10) > 0;
+        return this.keyboard.keyd && this.character.bottles.length > 0;
     }
 
     mapObj(obj) {
@@ -121,7 +131,7 @@ class World {
         this.addObjectsToMap(this.level.bottles);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.enemies);
-        this.addObjectsToMap(this.bottles)
+        this.addObjectsToMap(this.bottles);
 
         this.ctx.translate(-this.camera_x, 0);
 
