@@ -25,6 +25,7 @@ body {
 }
 
 .start-page {
+    display: none !important;
     width: 720px;
     height: 480px;
     position: absolute;
@@ -58,9 +59,20 @@ body {
 .info-btn,
 .mute-btn,
 .full-screen-btn {
-    
+    font-size: 30px;
+    margin-left: 5px;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: inherit;
+    transition: transform 0.2s ease-in-out;
 }
 
+.info-btn:hover,
+.mute-btn:hover,
+.full-screen-btn:hover {
+    transform: scale(1.2);
+}
 
 .start-button:hover {
     background-color: #e4ecec;
