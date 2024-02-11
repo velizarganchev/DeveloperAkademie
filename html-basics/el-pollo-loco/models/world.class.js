@@ -87,24 +87,20 @@ class World {
         return this.keyboard.keyd && this.character.bottles.length > 0;
     }
 
-    mapObj(obj) {
-        if (obj.otherDirection) {
-            this.changeDirection(obj);
-        }
-        obj.draw(this.ctx);
-        obj.drawFrame(this.ctx);
-        if (obj.otherDirection) {
-            this.changeDirectionBack(obj);
-        }
-    }
 
-
+    /**
+    * Reverses the direction of the object on the x-axis.
+    * @param {Object} obj - The object to change direction.
+    */
     changeDirectionBack(obj) {
         obj.x = obj.x * -1;
         this.ctx.restore();
     }
 
-
+    /**
+     * Changes the direction of the object on the x-axis.
+     * @param {Object} obj - The object to change direction.
+     */
     changeDirection(obj) {
         this.ctx.save();
         this.ctx.translate(obj.width, 0);
@@ -112,14 +108,36 @@ class World {
         obj.x = obj.x * -1;
     }
 
+    /**
+     * Maps an object by drawing it on the canvas.
+     * @param {Object} obj - The object to be drawn.
+     */
+    mapObj(obj) {
+        if (obj.otherDirection) {
+            this.changeDirection(obj);
+        }
 
+        obj.draw(this.ctx);
+        obj.drawFrame(this.ctx);
+
+        if (obj.otherDirection) {
+            this.changeDirectionBack(obj);
+        }
+    }
+
+    /**
+     * Adds objects to the map and draws them on the canvas.
+     * @param {Array} objects - An array of objects to be drawn.
+     */
     addObjectsToMap(objects) {
         objects.forEach(o => {
             this.mapObj(o);
         });
     }
 
-
+    /**
+     * Draws the entire scene on the canvas, including backgrounds, status bars, characters, and objects.
+     */
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
@@ -132,7 +150,7 @@ class World {
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.bottles);
- 
+
         this.ctx.translate(-this.camera_x, 0);
 
         let self = this;
@@ -141,6 +159,9 @@ class World {
         });
     }
 
+    /**
+     * Draws the status bars on the canvas.
+     */
     drawStatusBars() {
         this.ctx.translate(-this.camera_x, 0);
         this.mapObj(this.healthStatusBar);
@@ -149,8 +170,12 @@ class World {
         this.ctx.translate(this.camera_x, 0);
     }
 
+    /**
+     * Draws the background elements on the canvas.
+     */
     drawBackgrounds() {
         this.addObjectsToMap(this.level.backgrounds);
         this.addObjectsToMap(this.level.clouds);
     }
+
 }

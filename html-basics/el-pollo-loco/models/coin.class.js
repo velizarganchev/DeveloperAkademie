@@ -1,3 +1,6 @@
+/**
+ * Represents a coin object in the game, extending the MovableObject class.
+ */
 class Coin extends MovableObject {
     id;
     width = 80;
@@ -8,7 +11,9 @@ class Coin extends MovableObject {
         '../img/8_coin/coin_2.png',
     ];
 
-
+    /**
+     * Coin class constructor. Loads the coin image, sets initial position, and initiates animation.
+     */
     constructor() {
         super().loadImage(this.IMAGES[0]);
         this.loadImages(this.IMAGES);
@@ -17,10 +22,12 @@ class Coin extends MovableObject {
         this.animate();
     }
 
-
+    /**
+     * Initiates continuous animation by periodically switching between coin images.
+     */
     animate() {
         setInterval(() => {
-            this.animateImg(this.IMAGES)
+            this.animateImg(this.IMAGES);
         }, 500);
     }
 }

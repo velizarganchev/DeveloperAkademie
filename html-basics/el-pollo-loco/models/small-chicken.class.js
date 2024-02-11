@@ -1,7 +1,15 @@
+/**
+ * Represents a small chicken enemy in the game.
+ */
 class SmallChicken extends MovableObject {
     y = 370;
     heightY = 370;
-    acceleration = 0.2
+
+    /**
+     * Acceleration factor for the small chicken.
+     */
+    acceleration = 0.2;
+    
     width = 46;
     height = 63;
     IMAGES_WALKING = [
@@ -10,7 +18,9 @@ class SmallChicken extends MovableObject {
         '../img/3_enemies_chicken/chicken_small/1_walk/3_w.png',
     ];
 
-
+    /**
+     * Creates a new instance of the SmallChicken class.
+     */
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
@@ -20,10 +30,12 @@ class SmallChicken extends MovableObject {
         this.animate();
     }
 
-
+    /**
+     * Animates the small chicken's movement and flying behavior.
+     */
     animate() {
         setInterval(() => {
-            this.animateImg(this.IMAGES_WALKING)
+            this.animateImg(this.IMAGES_WALKING);
         }, 1000 / 10);
         setInterval(() => {
             this.moveLeft();
@@ -33,7 +45,9 @@ class SmallChicken extends MovableObject {
         }, 1000 / 30);
     }
 
-
+    /**
+     * Simulates the flying behavior of the small chicken.
+     */
     fly() {
         this.speedY = 5 + Math.random() * 2;
     }

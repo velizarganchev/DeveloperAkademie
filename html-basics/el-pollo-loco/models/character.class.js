@@ -1,3 +1,6 @@
+/**
+ * Represents the main character in the game, extending the MovableObject class.
+ */
 class Charcter extends MovableObject {
     y = 80;
     width = 150;
@@ -67,6 +70,11 @@ class Charcter extends MovableObject {
     walking_sound = new Audio('../audio/walking.mp3');
 
 
+    /**
+    * Creates a new instance of the Character class.
+    * Initializes the character with default settings, loads initial walking image,
+    * and sets up animations for walking, jumping, hurt, and death.
+    */
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
@@ -77,8 +85,12 @@ class Charcter extends MovableObject {
         this.animate();
     }
 
-
+    /**
+    * Initiates continuous animation loops for character movement and image changes.
+    * Handles character movement based on keyboard input and triggers appropriate animations.
+    */
     animate() {
+        // Interval for movement animation.
         let chAnimateMoveInterval = setInterval(() => {
             this.walking_sound.pause();
             if (this.canMoveRight()) {
@@ -89,12 +101,12 @@ class Charcter extends MovableObject {
             }
             if (this.canJump()) {
                 this.jump();
-                this.index = 0;   
+                this.index = 0;
             }
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
 
-
+        // Interval for image changes based on character actions.
         let chAnimateImgInterval = setInterval(() => {
             if (this.isDead()) {
                 this.animateImg(this.IMAGES_DEAD);
@@ -108,51 +120,73 @@ class Charcter extends MovableObject {
         }, 1000 / 10);
     }
 
-
+    /**
+     * Checks if the character can jump.
+     * @returns {boolean} - True if the character can jump, otherwise false.
+     */
     canJump() {
         return (this.world.keyboard.space || this.world.keyboard.arrowup) && !this.isAboveGround();
     }
 
-
+    /**
+     * Moves the character to the left and plays the walking sound.
+     */
     moveLeft() {
         super.moveLeft();
         this.otherDirection = true;
         this.walking_sound.play();
     }
 
-
+    /**
+     * Moves the character to the right and plays the walking sound.
+     */
     moveRight() {
         super.moveRight();
         this.otherDirection = false;
         this.walking_sound.play();
     }
 
-
+    /**
+     * Checks if the character can move left.
+     * @returns {boolean} - True if the character can move left, otherwise false.
+     */
     canMoveLeft() {
         return this.world.keyboard.arrowleft && this.x > 0;
     }
 
-
+    /**
+     * Checks if the character can move right.
+     * @returns {boolean} - True if the character can move right, otherwise false.
+     */
     canMoveRight() {
         return this.world.keyboard.arrowright && this.x < this.world.level.level_end_x;
     }
 
-
+    /**
+     * Takes a coin and adds it to the character's coin collection if there is space.
+     * @param {Coin} coin - The coin to be taken.
+     */
     takeCoin(coin) {
         if (this.coins.length < 10) {
             this.coins.push(coin);
         }
     }
 
-
+    /**
+     * Takes a bottle and adds it to the character's bottle collection if there is space.
+     * @param {Bottle} bottle - The bottle to be taken.
+     */
     takeBottle(bottle) {
         if (this.bottles.length < 10) {
             this.bottles.push(bottle);
         }
     }
 
-
+    /**
+     * Initiates a jump by setting the vertical speed.
+     */
     jump() {
         this.speedY = 30;
     }
+
 }

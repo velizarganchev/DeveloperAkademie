@@ -1,3 +1,6 @@
+/**
+ * Represents a bottle object that extends the MovableObject class.
+ */
 class Bottle extends MovableObject {
     id;
     width = 80;
@@ -8,6 +11,10 @@ class Bottle extends MovableObject {
         '../img/6_salsa_bottle/2_salsa_bottle_on_ground.png',
     ];
 
+
+    /**
+     * Creates a new instance of the Bottle class.
+     */
     constructor() {
         super().loadImage(this.IMAGES[0]);
         this.loadImages(this.IMAGES);
@@ -16,9 +23,13 @@ class Bottle extends MovableObject {
         this.animate();
     }
 
+
+    /**
+     * Animates the bottle by cycling through its images.
+     */
     animate() {
         setInterval(() => {
-            this.animateImg(this.IMAGES)
+            this.animateImg(this.IMAGES);
         }, 500);
     }
 }

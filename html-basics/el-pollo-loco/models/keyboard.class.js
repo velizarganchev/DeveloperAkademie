@@ -1,3 +1,6 @@
+/**
+ * Represents a virtual keyboard, tracking the state of various keys.
+ */
 class Keyboard {
     arrowleft = false;
     arrowright = false;
