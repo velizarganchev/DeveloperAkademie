@@ -5,7 +5,7 @@ class Charcter extends MovableObject {
     y = 80;
     width = 150;
     height = 235;
-    speed = 6;
+    speed = 7;
     coins = [];
     bottles = [];
     IMAGES_IDLE = [
@@ -103,7 +103,7 @@ class Charcter extends MovableObject {
                 this.jump();
                 this.index = 0;
             }
-            this.world.camera_x = -this.x + 100;
+            this.world.camera_x = -this.x + 100; //!!!
         }, 1000 / 60);
 
         // Interval for image changes based on character actions.

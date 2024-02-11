@@ -1,24 +1,32 @@
+// Initialize an empty array to store cloud layers
+const cloudLayers = [];
+
+// Define the number of cloud layers
+const numLayers = 5;
+
+// Define the number of clouds per layer
+const cloudsPerLayer = 3;
+
+// Set the starting position for the first cloud layer
+let position = -300;
+
+// Iterate over the number of cloud layers
+for (let i = 1; i <= numLayers; i++) {
+    for (let j = 1; j <= cloudsPerLayer; j++) {
+        // Create a new cloud with a dynamic image path based on the layer and cloud number
+        const cloud = new Cloud(`../img/5_background/layers/4_clouds/${j % 2 === 0 ? 2 : 1}.png`, position);
+        cloudLayers.push(cloud);
+        position += 500;
+    }
+}
+
+
+const bottles = Array.from({ length: 10 }, () => new Bottle());
+const coins = Array.from({ length: 10 }, () => new Coin());
+
 const levelOne = new Level(
-    [
-        new Cloud('../img/5_background/layers/4_clouds/2.png', -350),
-        new Cloud('../img/5_background/layers/4_clouds/1.png', 200),
-        new Cloud('../img/5_background/layers/4_clouds/2.png', 700),
-
-        new Cloud('../img/5_background/layers/4_clouds/2.png', 1200),
-        new Cloud('../img/5_background/layers/4_clouds/1.png', 1700),
-        new Cloud('../img/5_background/layers/4_clouds/2.png', 2200),
-
-        new Cloud('../img/5_background/layers/4_clouds/2.png', 2700),
-        new Cloud('../img/5_background/layers/4_clouds/1.png', 3200),
-        new Cloud('../img/5_background/layers/4_clouds/2.png', 3700),
-
-        new Cloud('../img/5_background/layers/4_clouds/2.png', 4200),
-        new Cloud('../img/5_background/layers/4_clouds/1.png', 4700),
-        new Cloud('../img/5_background/layers/4_clouds/2.png', 5200),
-
-        new Cloud('../img/5_background/layers/4_clouds/2.png', 5700),
-    ],
-    [
+    cloudLayers,
+    [ //!!!!!!!!!!!
         new BackgroundObject('../img/5_background/layers/air.png', -719),
         new BackgroundObject('../img/5_background/layers/3_third_layer/2.png', -719),
         new BackgroundObject('../img/5_background/layers/2_second_layer/2.png', -719),
@@ -60,10 +68,10 @@ const levelOne = new Level(
         new BackgroundObject('../img/5_background/layers/2_second_layer/2.png', 719 * 7),
         new BackgroundObject('../img/5_background/layers/1_first_layer/2.png', 719 * 7),
     ],
-    [
+    [ //!!!!!!!!!
         new Chicken(),
         new Chicken(),
-        new Chicken(),
+        new Chicken(),     
         new Chicken(),
         new Chicken(),
         new SmallChicken,
@@ -73,28 +81,6 @@ const levelOne = new Level(
         new SmallChicken,
         new EndBoss(),
     ],
-    [
-        new Bottle(),
-        new Bottle(),
-        new Bottle(),
-        new Bottle(),
-        new Bottle(),
-        new Bottle(),
-        new Bottle(),
-        new Bottle(),
-        new Bottle(),
-        new Bottle(),
-    ],
-    [
-        new Coin(),
-        new Coin(),
-        new Coin(),
-        new Coin(),
-        new Coin(),
-        new Coin(),
-        new Coin(),
-        new Coin(),
-        new Coin(),
-        new Coin(),
-    ]
+    bottles,
+    coins
 )

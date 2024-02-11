@@ -23,7 +23,6 @@ class World {
 
     setWorld() {
         this.character.world = this;
-
     }
 
 
@@ -44,8 +43,6 @@ class World {
             }, 3000);
         }, 200);
     }
-
-
 
     checkCollisions() {
         this.level.enemies.forEach((enemy) => {

@@ -31,7 +31,7 @@ class Chicken extends MovableObject {
         // Interval for image changes during walking animation.
         setInterval(() => {
             this.animateImg(this.IMAGES_WALKING);
-        }, 1000 / 10);
+        }, 1000 / 5);
 
         // Interval for continuous leftward movement.
         setInterval(() => {
