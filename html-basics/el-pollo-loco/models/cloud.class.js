@@ -10,9 +10,9 @@ class Cloud extends MovableObject {
      * Cloud class constructor. Loads the cloud image and sets initial position.
      * @param {string} path - The path to the cloud image.
      */
-    constructor(path) {
+    constructor(path, x) {
         super().loadImage(path);
-        this.x = 300;
+        this.x = x;
         this.animate();
     }
 

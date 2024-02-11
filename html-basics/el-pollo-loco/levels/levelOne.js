@@ -1,6 +1,22 @@
 const levelOne = new Level(
     [
-        new Cloud('../img/5_background/layers/4_clouds/1.png'),
+        new Cloud('../img/5_background/layers/4_clouds/2.png', -350),
+        new Cloud('../img/5_background/layers/4_clouds/1.png', 200),
+        new Cloud('../img/5_background/layers/4_clouds/2.png', 700),
+
+        new Cloud('../img/5_background/layers/4_clouds/2.png', 1200),
+        new Cloud('../img/5_background/layers/4_clouds/1.png', 1700),
+        new Cloud('../img/5_background/layers/4_clouds/2.png', 2200),
+
+        new Cloud('../img/5_background/layers/4_clouds/2.png', 2700),
+        new Cloud('../img/5_background/layers/4_clouds/1.png', 3200),
+        new Cloud('../img/5_background/layers/4_clouds/2.png', 3700),
+
+        new Cloud('../img/5_background/layers/4_clouds/2.png', 4200),
+        new Cloud('../img/5_background/layers/4_clouds/1.png', 4700),
+        new Cloud('../img/5_background/layers/4_clouds/2.png', 5200),
+
+        new Cloud('../img/5_background/layers/4_clouds/2.png', 5700),
     ],
     [
         new BackgroundObject('../img/5_background/layers/air.png', -719),

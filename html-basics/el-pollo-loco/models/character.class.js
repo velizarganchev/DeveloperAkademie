@@ -5,7 +5,7 @@ class Charcter extends MovableObject {
     y = 80;
     width = 150;
     height = 235;
-    speed = 10;
+    speed = 6;
     coins = [];
     bottles = [];
     IMAGES_IDLE = [
