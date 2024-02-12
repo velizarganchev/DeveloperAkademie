@@ -41,6 +41,7 @@ class DrawableObject {
             ctx.rect(this.x, this.y, this.width, this.height);
             ctx.stroke();
         }
+
     }
 
     /**
