@@ -66,10 +66,8 @@ class Charcter extends MovableObject {
         '../img/2_character_pepe/5_dead/D-56.png',
         '../img/2_character_pepe/5_dead/D-57.png',
     ];
-    offset = { top: 5, left: 15, right: 15, bottom: 5 };
+    offset = { top: 50, left: 30, right: 30, bottom: 20 };
     world;
-    walking_sound = new Audio('../audio/walking.mp3');
-    hurt_sound = new Audio('../audio/hurtTwo.mp3');
 
 
     /**
@@ -96,7 +94,7 @@ class Charcter extends MovableObject {
     animate() {
         // Interval for movement animation.
         let chAnimateMoveInterval = setInterval(() => {
-            this.walking_sound.pause();
+            walking_sound.pause();
 
             if (this.canMoveRight()) {
                 this.moveRight();
@@ -113,20 +111,27 @@ class Charcter extends MovableObject {
 
         // Interval for image changes based on character actions.
         let chAnimateImgInterval = setInterval(() => {
-            this.hurt_sound.pause();
+            hurt_sound.pause();
+            sleep_sound.pause();
+
             let waitTime = (new Date().getTime() - this.lastMovingTime) / 1000;
 
             if (this.isDead()) {
                 this.animateImg(this.IMAGES_DEAD);
             } else if (this.isHurt()) {
-                this.hurt_sound.play();
+                hurt_sound.play();
                 this.animateImg(this.IMAGES_HURT);
             } else if (this.isAboveGround()) {
                 this.animateImg(this.IMAGES_JUMPING);
             } else if (this.world.keyboard.arrowright === true || this.world.keyboard.arrowleft === true) {
                 this.animateImg(this.IMAGES_WALKING);
             } else {
-                waitTime < 5 ? this.animateImg(this.IMAGES_IDLE) : this.animateImg(this.IMAGES_LONGIDLE);
+                if (waitTime < 5) {
+                    this.animateImg(this.IMAGES_IDLE);
+                } else {
+                    sleep_sound.play();
+                    this.animateImg(this.IMAGES_LONGIDLE);
+                }
             }
         }, 1000 / 10);
     }
@@ -153,7 +158,7 @@ class Charcter extends MovableObject {
     moveLeft() {
         super.moveLeft();
         this.otherDirection = true;
-        this.walking_sound.play();
+        walking_sound.play();
         this.lastMovingTime = new Date().getTime();
     }
 
@@ -163,7 +168,7 @@ class Charcter extends MovableObject {
     moveRight() {
         super.moveRight();
         this.otherDirection = false;
-        this.walking_sound.play();
+        walking_sound.play();
         this.lastMovingTime = new Date().getTime();
     }
 

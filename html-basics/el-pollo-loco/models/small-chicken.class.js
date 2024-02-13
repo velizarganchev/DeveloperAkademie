@@ -49,6 +49,6 @@ class SmallChicken extends MovableObject {
      * Simulates the flying behavior of the small chicken.
      */
     fly() {
-        this.speedY = 5 + Math.random() * 2;
+        this.speedY = 3 + Math.random() * 2;
     }
 }

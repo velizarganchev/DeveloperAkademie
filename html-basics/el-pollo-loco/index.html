@@ -2,11 +2,11 @@
 <html lang="en" translate="no">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon-32x32.png">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/favicon-32x32.png" />
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <title>El Pollo Loco</title>
 </head>
 
@@ -20,7 +20,7 @@
                     <button class="info-btn">
                         <i class="fa-solid fa-gamepad"></i>
                     </button>
-                    <button class="mute-btn">
+                    <button class="mute-btn" onclick="handleSound()" id="sound-btn">
                         <i class="fa-solid fa-volume-xmark"></i>
                     </button>
                     <button class="full-screen-btn">
@@ -33,6 +33,8 @@
     </div>
 
     <script src="https://kit.fontawesome.com/255106e16f.js" crossorigin="anonymous"></script>
+    <script src="./js/sounds.js"></script>
+
     <script src="./models/drawable-object.js"></script>
     <script src="./models/movable-object.class.js"></script>
     <script src="./models/throwable-object.class.js"></script>
