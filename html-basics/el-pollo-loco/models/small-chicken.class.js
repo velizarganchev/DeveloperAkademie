@@ -2,6 +2,7 @@
  * Represents a small chicken enemy in the game.
  */
 class SmallChicken extends MovableObject {
+    id;
     y = 370;
     heightY = 370;
 
@@ -9,7 +10,7 @@ class SmallChicken extends MovableObject {
      * Acceleration factor for the small chicken.
      */
     acceleration = 0.2;
-    
+
     width = 46;
     height = 63;
     IMAGES_WALKING = [
@@ -18,12 +19,16 @@ class SmallChicken extends MovableObject {
         '../img/3_enemies_chicken/chicken_small/1_walk/3_w.png',
     ];
 
+    IMAGES_DEAD = ['../img/3_enemies_chicken/chicken_small/2_dead/dead.png'];
+
     /**
      * Creates a new instance of the SmallChicken class.
      */
     constructor() {
         super().loadImage(this.IMAGES_WALKING[0]);
         this.loadImages(this.IMAGES_WALKING);
+        this.loadImages(this.IMAGES_DEAD);
+        this.id = (Math.random() * 1000).toFixed(0);
         this.x = 500 + Math.random() * 4200;
         this.speed = 0.25 + Math.random() * 0.25;
         this.applyGravity();
@@ -34,10 +39,10 @@ class SmallChicken extends MovableObject {
      * Animates the small chicken's movement and flying behavior.
      */
     animate() {
-        setInterval(() => {
+        this.walking = setInterval(() => {
             this.animateImg(this.IMAGES_WALKING);
         }, 1000 / 10);
-        setInterval(() => {
+        this.move = setInterval(() => {
             this.moveLeft();
             if (!this.isAboveGround()) {
                 this.fly();
@@ -50,5 +55,16 @@ class SmallChicken extends MovableObject {
      */
     fly() {
         this.speedY = 3 + Math.random() * 2;
+    }
+
+    dead() {
+        this.stopIntervals();
+        this.animateImg(this.IMAGES_DEAD);
+    }
+
+    stopIntervals() {
+        clearInterval(this.walking);
+        clearInterval(this.move);
+        // Sound
     }
 }

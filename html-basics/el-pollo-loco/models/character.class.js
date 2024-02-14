@@ -5,7 +5,7 @@ class Charcter extends MovableObject {
     y = 80;
     width = 150;
     height = 235;
-    speed = 7;
+    speed = 8;
     lastMovingTime = new Date().getTime();
     coins = [];
     bottles = [];
@@ -66,7 +66,7 @@ class Charcter extends MovableObject {
         '../img/2_character_pepe/5_dead/D-56.png',
         '../img/2_character_pepe/5_dead/D-57.png',
     ];
-    offset = { top: 50, left: 30, right: 30, bottom: 20 };
+    // offset = { top: 50, left: 30, right: 30, bottom: 20 };
     world;
 
 

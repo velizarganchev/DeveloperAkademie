@@ -34,7 +34,7 @@ class ThrowableObject extends MovableObject {
     /**
      * Offset values for positioning the throwable object within the game.
      */
-    offset = { top: +40, left: +40, right: +20, bottom: +40 };
+    // offset = { top: +40, left: +40, right: +20, bottom: +40 };
 
     /**
      * Creates a new instance of the ThrowableObject class.

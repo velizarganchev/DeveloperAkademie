@@ -2,7 +2,7 @@
  * Represents the end boss in the game, a movable object with specific properties and animations.
  */
 class EndBoss extends MovableObject {
-
+    id;
     x = 5450;
     width = 250;
     height = 375;
@@ -24,6 +24,7 @@ class EndBoss extends MovableObject {
     constructor() {
         super().loadImage(this.IMAGES[0]);
         this.loadImages(this.IMAGES);
+        this.id = (Math.random() * 1000).toFixed(0);
         this.animate();
     }
 
