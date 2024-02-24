@@ -34,7 +34,7 @@ function init() {
  */
 function start() {
     // Retrieve the HTML element with the ID 'start-page-id'
-    let startPage = document.getElementById('start-page-id');
+    let startBtn = document.getElementById('start-btn');
 
     // Declaration and initialization of the variable startGame
     startGame = true;
@@ -43,7 +43,7 @@ function start() {
     init();
 
     // Hide the start page
-    startPage.style.display = 'none';
+    startBtn.style.display = 'none';
 }
 
 /**

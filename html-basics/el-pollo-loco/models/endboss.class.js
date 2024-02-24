@@ -10,6 +10,7 @@ class EndBoss extends MovableObject {
     energy = 100;
     startWalking = false;
     firstAttack = false;
+    healthStatusBar = false;
     speed = 20;
 
     IMAGES_ALERT = [

@@ -52,6 +52,7 @@ class World {
 
             if (this.endBossStartWalking()) {
                 this.endBoss.startWalking = true;
+                this.endBoss.healthStatusBar = true;
             }
 
             if (this.firstAttackPosition()) {
@@ -321,9 +322,11 @@ class World {
     drawStatusBars() {
         this.ctx.translate(-this.camera_x, 0);
         this.mapObj(this.healthStatusBar);
-        this.mapObj(this.healthEndBossStatusBar);
         this.mapObj(this.coinsStatusBar);
         this.mapObj(this.bottleStatusBar);
+        if (this.endBoss.healthStatusBar) {
+            this.mapObj(this.healthEndBossStatusBar);
+        }
         this.ctx.translate(this.camera_x, 0);
     }
 
