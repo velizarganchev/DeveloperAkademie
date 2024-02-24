@@ -26,14 +26,21 @@ body {
     justify-content: center;
 }
 
+canvas {
+    display: block;
+    background-color: black;
+    background-image: url('img/9_intro_outro_screens/start/startscreen_1.png');
+    background-position: center;
+    background-size: 720px 480px;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+}
+
 .start-page {
     display: flex;
     width: 720px;
     height: 480px;
     position: absolute;
-    background-image: url('img/9_intro_outro_screens/start/startscreen_1.png');
-    background-position: center;
-    background-size: 720px 480px;
     border-radius: 10px;
     display: flex;
     flex-direction: row-reverse;
@@ -44,9 +51,12 @@ body {
     0% {
         transform: translateY(0);
     }
+
     50% {
-        transform: translateY(10px); /* Ändern Sie den Wert nach Bedarf */
+        transform: translateY(10px);
+        /* Ändern Sie den Wert nach Bedarf */
     }
+
     100% {
         transform: translateY(0);
     }
@@ -54,11 +64,15 @@ body {
 
 /* Definiert eine Keyframe-Animation namens "scaleButton" */
 @keyframes scaleButton {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: scale(1);
     }
+
     50% {
-        transform: scale(1.2); /* Ändern Sie den Wert nach Bedarf */
+        transform: scale(1.2);
+        /* Ändern Sie den Wert nach Bedarf */
     }
 }
 
@@ -86,7 +100,7 @@ body {
 .info-btn,
 .mute-btn,
 .full-screen-btn {
-    font-size: 30px;
+    font-size: 20px;
     margin-left: 5px;
     padding: 10px;
     border: none;
@@ -105,12 +119,6 @@ body {
     background-color: #e4ecec;
     color: #ff9600;
     border: 1px solid #ff9600;
-}
-
-canvas {
-    display: block;
-    background-color: black;
-    border-radius: 10px;
 }
 
 h1 {
