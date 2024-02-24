@@ -3,8 +3,9 @@
  */
 class Charcter extends MovableObject {
     y = 80;
-    width = 150;
-    height = 235;
+    heightY = 175;
+    width = 170;
+    height = 255;
     speed = 8;
     lastMovingTime = new Date().getTime();
     coins = [];
@@ -66,9 +67,8 @@ class Charcter extends MovableObject {
         '../img/2_character_pepe/5_dead/D-56.png',
         '../img/2_character_pepe/5_dead/D-57.png',
     ];
-    // offset = { top: 50, left: 30, right: 30, bottom: 20 };
     world;
-
+    offset = { top: 5, left: 5, right: 5, bottom: 5 };
 
     /**
     * Creates a new instance of the Character class.
@@ -113,7 +113,6 @@ class Charcter extends MovableObject {
         let chAnimateImgInterval = setInterval(() => {
             hurt_sound.pause();
             sleep_sound.pause();
-
             let waitTime = (new Date().getTime() - this.lastMovingTime) / 1000;
 
             if (this.isDead()) {
@@ -126,10 +125,10 @@ class Charcter extends MovableObject {
             } else if (this.world.keyboard.arrowright === true || this.world.keyboard.arrowleft === true) {
                 this.animateImg(this.IMAGES_WALKING);
             } else {
-                if (waitTime < 5) {
+                if (waitTime < 8) {
                     this.animateImg(this.IMAGES_IDLE);
                 } else {
-                    sleep_sound.play();
+                    // sleep_sound.play();
                     this.animateImg(this.IMAGES_LONGIDLE);
                 }
             }

@@ -21,8 +21,10 @@ for (let i = 1; i <= numLayers; i++) {
 }
 
 
-const bottles = Array.from({ length: 6 }, () => new Bottle());
-const coins = Array.from({ length: 6 }, () => new Coin());
+const bottles = Array.from({ length: 10 }, () => new Bottle());
+const coins = Array.from({ length: 10 }, () => new Coin());
+
+
 
 const levelOne = new Level(
     cloudLayers,
@@ -71,7 +73,7 @@ const levelOne = new Level(
     [ //!!!!!!!!!
         new Chicken(),
         new Chicken(),
-        new Chicken(),     
+        new Chicken(),
         new Chicken(),
         new Chicken(),
         new SmallChicken,

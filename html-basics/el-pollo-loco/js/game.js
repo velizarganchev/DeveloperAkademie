@@ -16,12 +16,17 @@ let world;
  */
 let keyboard = new Keyboard();
 
+
+let startGame = false;
+
 /**
  * Initializes the game by obtaining the canvas element and creating a new world.
  */
 function init() {
     canvas = document.getElementById('canvas');
-    world = new World(canvas, keyboard);
+    if (startGame) {
+        world = new World(canvas, keyboard);
+    }
 }
 
 /**

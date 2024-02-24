@@ -7,7 +7,12 @@ class EndBoss extends MovableObject {
     width = 250;
     height = 375;
     y = 80;
-    IMAGES = [
+    energy = 100;
+    startWalking = false;
+    firstAttack = false;
+    speed = 20;
+
+    IMAGES_ALERT = [
         '../img/4_enemie_boss_chicken/2_alert/G5.png',
         '../img/4_enemie_boss_chicken/2_alert/G6.png',
         '../img/4_enemie_boss_chicken/2_alert/G7.png',
@@ -17,13 +22,43 @@ class EndBoss extends MovableObject {
         '../img/4_enemie_boss_chicken/2_alert/G11.png',
         '../img/4_enemie_boss_chicken/2_alert/G12.png',
     ];
+    IMAGES_WALK = [
+        '../img/4_enemie_boss_chicken/1_walk/G1.png',
+        '../img/4_enemie_boss_chicken/1_walk/G2.png',
+        '../img/4_enemie_boss_chicken/1_walk/G3.png',
+        '../img/4_enemie_boss_chicken/1_walk/G4.png',
+    ];
+    IMAGES_ATTACK = [
+        '../img/4_enemie_boss_chicken/3_attack/G13.png',
+        '../img/4_enemie_boss_chicken/3_attack/G14.png',
+        '../img/4_enemie_boss_chicken/3_attack/G15.png',
+        '../img/4_enemie_boss_chicken/3_attack/G16.png',
+        '../img/4_enemie_boss_chicken/3_attack/G17.png',
+        '../img/4_enemie_boss_chicken/3_attack/G18.png',
+        '../img/4_enemie_boss_chicken/3_attack/G19.png',
+        '../img/4_enemie_boss_chicken/3_attack/G20.png',
+    ];
+    IMAGES_HURT = [
+        '../img/4_enemie_boss_chicken/4_hurt/G21.png',
+        '../img/4_enemie_boss_chicken/4_hurt/G22.png',
+        '../img/4_enemie_boss_chicken/4_hurt/G23.png',
+    ];
+    IMAGES_DEAD = [
+        '../img/4_enemie_boss_chicken/5_dead/G24.png',
+        '../img/4_enemie_boss_chicken/5_dead/G25.png',
+        '../img/4_enemie_boss_chicken/5_dead/G26.png',
+    ];
 
     /**
      * Initializes the end boss with the first image in the sequence and loads all images.
      */
     constructor() {
-        super().loadImage(this.IMAGES[0]);
-        this.loadImages(this.IMAGES);
+        super().loadImage(this.IMAGES_ALERT[0]);
+        this.loadImages(this.IMAGES_WALK);
+        this.loadImages(this.IMAGES_ALERT);
+        this.loadImages(this.IMAGES_HURT);
+        this.loadImages(this.IMAGES_ATTACK);
+        this.loadImages(this.IMAGES_DEAD);
         this.id = (Math.random() * 1000).toFixed(0);
         this.animate();
     }
@@ -32,8 +67,37 @@ class EndBoss extends MovableObject {
      * Animates the end boss by cycling through its images at a specific interval.
      */
     animate() {
-        setInterval(() => {
-            this.animateImg(this.IMAGES)
+        this.endBossImagesInterval = setInterval(() => {
+            if (this.isHurt()) {
+                this.animateImg(this.IMAGES_HURT);
+            } else if (this.startWalking) {
+                this.moveLeft();
+            } else if (this.firstAttack) {
+                this.attack();
+            } else {
+                this.animateImg(this.IMAGES_ALERT);
+            }
         }, 1000 / 5);
     }
+
+    moveLeft() {
+        super.moveLeft();
+        this.animateImg(this.IMAGES_WALK);
+    }
+
+    attack() {
+        this.animateImg(this.IMAGES_ATTACK);
+    }
+
+    dead() {
+        this.stopIntervals();
+        this.animateImg(this.IMAGES_DEAD);
+
+    }
+
+    stopIntervals() {
+        clearInterval(this.endBossImagesInterval);
+        // Sound
+    }
+
 }

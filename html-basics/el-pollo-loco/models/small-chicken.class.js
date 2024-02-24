@@ -3,16 +3,17 @@
  */
 class SmallChicken extends MovableObject {
     id;
-    y = 370;
-    heightY = 370;
-
+    y = 360;
+    heightY = 350;
     /**
      * Acceleration factor for the small chicken.
      */
     acceleration = 0.2;
 
-    width = 46;
-    height = 63;
+    width = 60;
+    height = 80;
+    offset = { top: -10, left: +5, right: +15, bottom: -50 };
+
     IMAGES_WALKING = [
         '../img/3_enemies_chicken/chicken_small/1_walk/1_w.png',
         '../img/3_enemies_chicken/chicken_small/1_walk/2_w.png',

@@ -6,9 +6,9 @@ class ThrowableObject extends MovableObject {
      * Indicates whether the throwable object is broken.
      */
     isBroken = false;
+    isCollidingWhithEnemy = false;
     width = 80;
     height = 80;
-
     /**
      * Collection of images representing the rotation of the throwable object.
      */
@@ -62,9 +62,9 @@ class ThrowableObject extends MovableObject {
         }, 25);
 
         let trowBottleInterval = setInterval(() => {
-            if (this.isAboveGround()) {
+            if (this.isAboveGround() && !this.isCollidingWhithEnemy) {
                 this.animateImg(this.IMAGES_ROTATION);
-            } else {
+            } else if (!this.isAboveGround() || this.isCollidingWhithEnemy) {
                 this.animateImg(this.IMAGES_SPLASH);
                 this.isBroken = true;
                 clearInterval(moveInterval);

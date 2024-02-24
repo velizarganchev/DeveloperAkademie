@@ -1,5 +1,4 @@
 const COLLISION_INTERVAL = 200;
-const BOTTLE_BREAK_TIME = 3000;
 class World {
     character = new Charcter();
     healthStatusBar = new StatusBarHealth();
@@ -11,6 +10,7 @@ class World {
     canvas;
     keyboard;
     level = levelOne;
+    endBoss = this.level.enemies.find(e => e instanceof EndBoss);
     camera_x = 0;
 
     /**
@@ -37,32 +37,110 @@ class World {
     }
 
     /**
-     * Main game loop that runs at regular intervals.
-     * Handles collisions, checks for object throwing, and manages bottle timing.
-     */
+ * Main game loop that runs at regular intervals.
+ * Handles collisions, checks for object throwing, and manages bottle timing.
+ */
     run() {
         setInterval(() => {
             this.checkCollisions(); // Check for collisions between objects
+
             if (this.checkThrowObject()) {
                 // If the character is attempting to throw an object, add a new bottle
-                let bottle = new ThrowableObject(this.character.x, this.character.y);
-                this.bottles.push(bottle);
-                this.character.bottles.pop(); // Reduce the character's bottle count
-                this.bottleStatusBar.setPercentage(this.character.bottles.length * 10); // Update bottle status bar
+                this.throwBottle();
             }
-            setTimeout(() => {
-                if (this.bottles.length > 0) {
-                    // Remove broken bottles after a delay
-                    this.bottles[0].isBroken && this.bottles.splice(0, 1);
-                    this.canTrow = true; // Allow throwing again
-                }
-            }, BOTTLE_BREAK_TIME); // Delay for checking broken bottles
+
+            if (this.endBossStartWalking()) {
+                this.endBoss.startWalking = true;
+            }
+
+            if (this.firstAttackPosition()) {
+                this.handleFirstAttack();
+            }
+
+            this.handleBrokenBottles();
         }, COLLISION_INTERVAL); // Main loop interval
     }
 
+    /**
+  * Handles the first attack behavior of the end boss.
+  */
+    handleFirstAttack() {
+        this.endBoss.startWalking = false;
+        this.endBoss.firstAttack = true;
+
+        setTimeout(() => {
+            this.endBoss.firstAttack = false;
+            this.endBoss.startWalking = true;
+        }, 3000); // 3000 milliseconds (3 seconds) delay
+    }
 
     /**
-    * Checks collisions with enemies, coins, and bottles, and handles corresponding actions.
+     * Checks if the end boss should start walking.
+     * @returns {boolean} - True if the end boss should start walking, false otherwise.
+     */
+    endBossStartWalking() {
+        return -4934 > this.camera_x;
+    }
+
+    /**
+     * Checks if the end boss is in the first attack position.
+     * @returns {boolean} - True if the end boss is in the first attack position, false otherwise.
+     */
+    firstAttackPosition() {
+        return this.endBoss.x < 4500;
+    }
+
+    /**
+     * Initiates the throwing action for the throwable object.
+     */
+    throwBottle() {
+        if (this.canTrow) {
+            let bottle = new ThrowableObject(this.character.x, this.character.y);
+            this.canTrow = false; // Disable throwing temporarily
+            this.bottles.push(bottle);
+            this.character.bottles.pop(); // Reduce the character's bottle count
+            this.bottleStatusBar.setPercentage(this.character.bottles.length * 10); // Update bottle status bar
+        }
+    }
+
+    /**
+     * Handles broken bottles after a delay.
+     */
+    handleBrokenBottles() {
+        if (this.bottles.length > 0) {
+            this.checkEnemyCollisionsForBottle();
+
+            if (this.bottles[0].isBroken) {
+                this.canTrow = true; // Allow throwing again
+                this.bottles.splice(0, 1); // Remove broken bottles from the list
+            }
+        }
+    }
+
+    /**
+     * Checks collisions between the first bottle in the list and enemies.
+     */
+    checkEnemyCollisionsForBottle() {
+        this.level.enemies.forEach((enemy) => {
+            if (this.bottles[0].isColliding(enemy)) {
+                this.bottles[0].isCollidingWhithEnemy = true;
+                if (enemy instanceof EndBoss) {
+                    if (enemy.isDead()) {
+                        enemy.dead();
+                        this.findAndRemoveEnemy(enemy.id);
+                    } else {
+                        enemy.hit(25);
+                    }
+                } else {
+                    enemy.dead();
+                    this.findAndRemoveEnemy(enemy.id);
+                }
+            }
+        });
+    }
+
+    /**
+     * Checks collisions with enemies, coins, and bottles, and handles corresponding actions.
      */
     checkCollisions() {
         this.checkEnemyCollisions();
@@ -78,7 +156,7 @@ class World {
             if (this.character.isColliding(enemy)) {
                 // If the character is not above ground, apply damage
                 if (!this.character.isAboveGround()) {
-                    this.character.hit();
+                    this.character.hit(5);
                     this.healthStatusBar.setPercentage(this.character.energy);
                 } else if (
                     this.character.isAboveGround() &&
@@ -122,6 +200,9 @@ class World {
         });
     }
 
+
+
+
     /**
     * Finds and removes an enemy from the level based on the provided enemyId after a delay of 1000 milliseconds.
     * @param {string} enemyId - The unique identifier of the enemy to be removed.
@@ -156,7 +237,7 @@ class World {
      * @returns {boolean} - True if the character is attempting to throw an object, false otherwise.
      */
     checkThrowObject() {
-        return this.keyboard.keyd && this.character.bottles.length > 0;
+        return this.keyboard.keyd && this.character.bottles.length > 0 && this.canTrow;
     }
 
 
