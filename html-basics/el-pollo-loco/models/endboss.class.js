@@ -70,6 +70,8 @@ class EndBoss extends MovableObject {
         this.endBossImagesInterval = setInterval(() => {
             if (this.isHurt()) {
                 this.animateImg(this.IMAGES_HURT);
+            } else if (this.isDead()) {
+                this.dead();
             } else if (this.startWalking) {
                 this.moveLeft();
             } else if (this.firstAttack) {
@@ -80,24 +82,35 @@ class EndBoss extends MovableObject {
         }, 1000 / 5);
     }
 
+    /**
+     * Moves the end boss to the left and plays the walking animation.
+     */
     moveLeft() {
         super.moveLeft();
         this.animateImg(this.IMAGES_WALK);
     }
 
+    /**
+     * Plays the attack animation.
+     */
     attack() {
         this.animateImg(this.IMAGES_ATTACK);
     }
 
+    /**
+     * Plays the dead animation, stops intervals, and handles any cleanup.
+     */
     dead() {
-        this.stopIntervals();
         this.animateImg(this.IMAGES_DEAD);
-
+        this.stopIntervals();
+        // Additional actions for dead state, e.g., sound
     }
 
+    /**
+     * Stops all intervals related to the end boss animations.
+     */
     stopIntervals() {
         clearInterval(this.endBossImagesInterval);
-        // Sound
+        // Additional cleanup if needed
     }
-
 }

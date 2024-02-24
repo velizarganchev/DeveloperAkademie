@@ -37,7 +37,7 @@ function start() {
     let startPage = document.getElementById('start-page-id');
 
     // Declaration and initialization of the variable startGame
-    let startGame = true;
+    startGame = true;
 
     // Call the initialization function
     init();

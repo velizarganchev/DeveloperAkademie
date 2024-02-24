@@ -4,11 +4,13 @@
 }
 
 body {
+    height: 100vh;
     margin: 0;
     font-family: 'Zabars', 'Arial', 'Helvetica', 'sans-serif';
     background-image: url('./img/5_background/desert.png');
     background-position: center;
     background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .content {
@@ -37,19 +39,44 @@ body {
     flex-direction: row-reverse;
 }
 
+/* Definiert eine Keyframe-Animation namens "moveButton" */
+@keyframes moveButton {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(10px); /* Ändern Sie den Wert nach Bedarf */
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Definiert eine Keyframe-Animation namens "scaleButton" */
+@keyframes scaleButton {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2); /* Ändern Sie den Wert nach Bedarf */
+    }
+}
+
 .start-button {
     position: absolute;
     top: 7%;
-    left: 40%;
+    left: 33%;
     padding: 10px;
     font-family: 'Zabars', 'Arial', 'Helvetica', 'sans-serif';
     font-size: 45px;
     font-weight: 400;
+    letter-spacing: 0.5rem;
     color: #e4ecec;
+    border: 1px solid white;
     background-color: #ff9600;
-    border: none;
     border-radius: 10px;
     cursor: pointer;
+    animation: scaleButton 2s infinite;
 }
 
 .icons-container {

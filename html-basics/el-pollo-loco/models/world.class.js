@@ -2,6 +2,7 @@ const COLLISION_INTERVAL = 200;
 class World {
     character = new Charcter();
     healthStatusBar = new StatusBarHealth();
+    healthEndBossStatusBar = new StatusBarHealthEndBoss();
     coinsStatusBar = new StatusBarCoins();
     bottleStatusBar = new StatusBarBottle();
     bottles = [];
@@ -129,6 +130,7 @@ class World {
                         enemy.dead();
                         this.findAndRemoveEnemy(enemy.id);
                     } else {
+                        this.healthEndBossStatusBar.setPercentage(enemy.energy);
                         enemy.hit(25);
                     }
                 } else {
@@ -319,6 +321,7 @@ class World {
     drawStatusBars() {
         this.ctx.translate(-this.camera_x, 0);
         this.mapObj(this.healthStatusBar);
+        this.mapObj(this.healthEndBossStatusBar);
         this.mapObj(this.coinsStatusBar);
         this.mapObj(this.bottleStatusBar);
         this.ctx.translate(this.camera_x, 0);
