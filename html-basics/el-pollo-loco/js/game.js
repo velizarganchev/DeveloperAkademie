@@ -30,6 +30,23 @@ function init() {
 }
 
 /**
+ * Initiates the game by hiding the start page and performing initialization.
+ */
+function start() {
+    // Retrieve the HTML element with the ID 'start-page-id'
+    let startPage = document.getElementById('start-page-id');
+
+    // Declaration and initialization of the variable startGame
+    let startGame = true;
+
+    // Call the initialization function
+    init();
+
+    // Hide the start page
+    startPage.style.display = 'none';
+}
+
+/**
  * Event listener for handling keydown events and updating the corresponding properties in the keyboard object.
  * @param {KeyboardEvent} e - The keydown event object.
  */
