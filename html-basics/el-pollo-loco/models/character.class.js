@@ -94,7 +94,7 @@ class Charcter extends MovableObject {
     animate() {
         // Interval for movement animation.
         let chAnimateMoveInterval = setInterval(() => {
-            walking_sound.pause();
+            walking_sound_character.pause();
 
             if (this.canMoveRight()) {
                 this.moveRight();
@@ -111,14 +111,14 @@ class Charcter extends MovableObject {
 
         // Interval for image changes based on character actions.
         let chAnimateImgInterval = setInterval(() => {
-            hurt_sound.pause();
-            sleep_sound.pause();
+            hurt_sound_character.pause();
+            sleep_sound_character.pause();
             let waitTime = (new Date().getTime() - this.lastMovingTime) / 1000;
 
             if (this.isDead()) {
                 this.animateImg(this.IMAGES_DEAD);
             } else if (this.isHurt()) {
-                hurt_sound.play();
+                hurt_sound_character.play();
                 this.animateImg(this.IMAGES_HURT);
             } else if (this.isAboveGround()) {
                 this.animateImg(this.IMAGES_JUMPING);
@@ -128,7 +128,7 @@ class Charcter extends MovableObject {
                 if (waitTime < 8) {
                     this.animateImg(this.IMAGES_IDLE);
                 } else {
-                    // sleep_sound.play();
+                    sleep_sound_character.play();
                     this.animateImg(this.IMAGES_LONGIDLE);
                 }
             }
@@ -157,7 +157,7 @@ class Charcter extends MovableObject {
     moveLeft() {
         super.moveLeft();
         this.otherDirection = true;
-        walking_sound.play();
+        walking_sound_character.play();
         this.lastMovingTime = new Date().getTime();
     }
 
@@ -167,7 +167,7 @@ class Charcter extends MovableObject {
     moveRight() {
         super.moveRight();
         this.otherDirection = false;
-        walking_sound.play();
+        walking_sound_character.play();
         this.lastMovingTime = new Date().getTime();
     }
 
@@ -193,6 +193,7 @@ class Charcter extends MovableObject {
      */
     takeCoin(coin) {
         if (this.coins.length < 10) {
+            take_coin_sound.play();
             this.coins.push(coin);
         }
     }
@@ -203,6 +204,7 @@ class Charcter extends MovableObject {
      */
     takeBottle(bottle) {
         if (this.bottles.length < 10) {
+            take_bottle_sound.play();
             this.bottles.push(bottle);
         }
     }

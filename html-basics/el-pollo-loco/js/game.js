@@ -26,6 +26,8 @@ function init() {
     canvas = document.getElementById('canvas');
     if (startGame) {
         world = new World(canvas, keyboard);
+        handleSound();
+        level_sound.volume = 0.2
     }
 }
 

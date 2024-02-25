@@ -62,10 +62,12 @@ class ThrowableObject extends MovableObject {
         }, 25);
 
         let trowBottleInterval = setInterval(() => {
+            splash_bottle_sound.pause()
             if (this.isAboveGround() && !this.isCollidingWhithEnemy) {
                 this.animateImg(this.IMAGES_ROTATION);
             } else if (!this.isAboveGround() || this.isCollidingWhithEnemy) {
                 this.animateImg(this.IMAGES_SPLASH);
+                splash_bottle_sound.play();
                 this.isBroken = true;
                 clearInterval(moveInterval);
                 clearInterval(trowBottleInterval);

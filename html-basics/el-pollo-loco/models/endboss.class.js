@@ -60,7 +60,7 @@ class EndBoss extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_DEAD);
-        this.id = (Math.random() * 1000).toFixed(0);
+        this.id = 22 + (Math.random() * 1000).toFixed(0);
         this.animate();
     }
 
@@ -74,6 +74,7 @@ class EndBoss extends MovableObject {
             } else if (this.isDead()) {
                 this.dead();
             } else if (this.startWalking) {
+                endboss_start_walking.play();
                 this.moveLeft();
             } else if (this.firstAttack) {
                 this.attack();

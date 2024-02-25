@@ -129,12 +129,15 @@ class World {
                 if (enemy instanceof EndBoss) {
                     if (enemy.isDead()) {
                         enemy.dead();
+                        hurt_chicken_sound.play();
                         this.findAndRemoveEnemy(enemy.id);
                     } else {
                         this.healthEndBossStatusBar.setPercentage(enemy.energy);
                         enemy.hit(25);
+                        hurt_chicken_sound.play();
                     }
                 } else {
+                    hurt_chicken_sound.play();
                     enemy.dead();
                     this.findAndRemoveEnemy(enemy.id);
                 }
@@ -167,6 +170,7 @@ class World {
                     (enemy instanceof Chicken || enemy instanceof SmallChicken)
                 ) {
                     // If character is jumping on an enemy, defeat the enemy
+                    hurt_chicken_sound.play();
                     enemy.dead();
                     this.character.jump();
                     this.findAndRemoveEnemy(enemy.id);
