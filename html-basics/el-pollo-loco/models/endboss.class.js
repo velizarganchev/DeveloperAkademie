@@ -71,8 +71,6 @@ class EndBoss extends MovableObject {
         this.endBossImagesInterval = setInterval(() => {
             if (this.isHurt()) {
                 this.animateImg(this.IMAGES_HURT);
-            } else if (this.isDead()) {
-                this.dead();
             } else if (this.startWalking) {
                 endboss_start_walking.play();
                 this.moveLeft();
@@ -105,7 +103,6 @@ class EndBoss extends MovableObject {
     dead() {
         this.animateImg(this.IMAGES_DEAD);
         this.stopIntervals();
-        // Additional actions for dead state, e.g., sound
     }
 
     /**

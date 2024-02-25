@@ -110,39 +110,11 @@ class World {
      */
     handleBrokenBottles() {
         if (this.bottles.length > 0) {
-            this.checkEnemyCollisionsForBottle();
-
             if (this.bottles[0].isBroken) {
                 this.canTrow = true; // Allow throwing again
                 this.bottles.splice(0, 1); // Remove broken bottles from the list
             }
         }
-    }
-
-    /**
-     * Checks collisions between the first bottle in the list and enemies.
-     */
-    checkEnemyCollisionsForBottle() {
-        this.level.enemies.forEach((enemy) => {
-            if (this.bottles[0].isColliding(enemy)) {
-                this.bottles[0].isCollidingWhithEnemy = true;
-                if (enemy instanceof EndBoss) {
-                    if (enemy.isDead()) {
-                        enemy.dead();
-                        hurt_chicken_sound.play();
-                        this.findAndRemoveEnemy(enemy.id);
-                    } else {
-                        this.healthEndBossStatusBar.setPercentage(enemy.energy);
-                        enemy.hit(25);
-                        hurt_chicken_sound.play();
-                    }
-                } else {
-                    hurt_chicken_sound.play();
-                    enemy.dead();
-                    this.findAndRemoveEnemy(enemy.id);
-                }
-            }
-        });
     }
 
     /**
@@ -155,29 +127,87 @@ class World {
     }
 
     /**
-     * Checks collisions with enemies and handles corresponding actions.
-     */
+ * Checks collisions with enemies and handles corresponding actions.
+ */
     checkEnemyCollisions() {
         this.level.enemies.forEach((enemy) => {
             if (this.character.isColliding(enemy)) {
-                // If the character is not above ground, apply damage
-                if (!this.character.isAboveGround()) {
-                    this.character.hit(5);
-                    this.healthStatusBar.setPercentage(this.character.energy);
-                } else if (
-                    this.character.isAboveGround() &&
-                    this.character.speedY < 0 &&
-                    (enemy instanceof Chicken || enemy instanceof SmallChicken)
-                ) {
-                    // If character is jumping on an enemy, defeat the enemy
-                    hurt_chicken_sound.play();
-                    enemy.dead();
-                    this.character.jump();
-                    this.findAndRemoveEnemy(enemy.id);
-                }
+                this.handleCharacterCollision(enemy);
+            } else if (this.bottles.length > 0 && this.bottles[0].isColliding(enemy)) {
+                this.handleBottleCollision(enemy);
             }
         });
     }
+
+    /**
+     * Handles collision between the character and an enemy.
+     * @param {Enemy} enemy - The enemy object involved in the collision.
+     */
+    handleCharacterCollision(enemy) {
+        if (!this.character.isAboveGround()) {
+            this.handleCharacterGroundCollision();
+        } else if (this.character.speedY < 0 && (enemy instanceof Chicken || enemy instanceof SmallChicken)) {
+            this.handleCharacterJumpCollision(enemy);
+        }
+    }
+
+    /**
+     * Handles collision between the character and the ground.
+     */
+    handleCharacterGroundCollision() {
+        this.character.hit(5);
+        this.healthStatusBar.setPercentage(this.character.energy);
+    }
+
+    /**
+     * Handles collision between the character and an enemy during a jump.
+     * @param {Enemy} enemy - The enemy object involved in the collision.
+     */
+    handleCharacterJumpCollision(enemy) {
+        hurt_chicken_sound.play();
+        enemy.dead();
+        this.character.jump();
+        this.findAndRemoveEnemy(enemy.id);
+    }
+
+    /**
+     * Handles collision between a bottle and an enemy.
+     * @param {Enemy} enemy - The enemy object involved in the collision.
+     */
+    handleBottleCollision(enemy) {
+        this.bottles[0].isCollidingWhithEnemy = true;
+        if (enemy instanceof EndBoss) {
+            this.handleEndBossCollision(enemy);
+        } else {
+            this.handleRegularEnemyCollision(enemy);
+        }
+    }
+
+    /**
+     * Handles collision between a bottle and the end boss.
+     * @param {EndBoss} endBoss - The end boss object involved in the collision.
+     */
+    handleEndBossCollision(endBoss) {
+        if (endBoss.isDead()) {
+            endBoss.dead();
+            this.findAndRemoveEnemy(endBoss.id);
+        } else {
+            this.healthEndBossStatusBar.setPercentage(endBoss.energy);
+            endBoss.hit(25);
+            hurt_chicken_sound.play();
+        }
+    }
+
+    /**
+     * Handles collision between a bottle and a regular enemy.
+     * @param {Enemy} enemy - The regular enemy object involved in the collision.
+     */
+    handleRegularEnemyCollision(enemy) {
+        hurt_chicken_sound.play();
+        enemy.dead();
+        this.findAndRemoveEnemy(enemy.id);
+    }
+
 
     /**
      * Checks collisions with coins and handles corresponding actions.
