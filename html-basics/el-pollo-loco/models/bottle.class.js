@@ -30,8 +30,9 @@ class Bottle extends MovableObject {
      * Animates the bottle by cycling through its images.
      */
     animate() {
-        setInterval(() => {
+        let bottleImgInterval = setInterval(() => {
             this.animateImg(this.IMAGES);
         }, 500);
+        this.allIntervals.push(bottleImgInterval);
     }
 }

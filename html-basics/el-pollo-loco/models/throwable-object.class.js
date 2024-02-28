@@ -13,22 +13,22 @@ class ThrowableObject extends MovableObject {
      * Collection of images representing the rotation of the throwable object.
      */
     IMAGES_ROTATION = [
-        '../img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
-        '../img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png',
-        '../img/6_salsa_bottle/bottle_rotation/3_bottle_rotation.png',
-        '../img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png',
+        'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
+        'img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png',
+        'img/6_salsa_bottle/bottle_rotation/3_bottle_rotation.png',
+        'img/6_salsa_bottle/bottle_rotation/4_bottle_rotation.png',
     ];
 
     /**
      * Collection of images representing the splash effect when the throwable object breaks.
      */
     IMAGES_SPLASH = [
-        '../img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png',
-        '../img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png',
-        '../img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png',
-        '../img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png',
-        '../img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
-        '../img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/1_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/2_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/3_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/4_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/5_bottle_splash.png',
+        'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png',
     ];
 
     /**

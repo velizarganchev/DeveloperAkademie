@@ -27,6 +27,7 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
+        console.log();
     }
 
     /**
@@ -131,10 +132,14 @@ class World {
  */
     checkEnemyCollisions() {
         this.level.enemies.forEach((enemy, index) => {
-            if (this.character.isColliding(enemy)) {
-                this.handleCharacterCollision(enemy, index);
-            } else if (this.bottles.length > 0 && this.bottles[0].isColliding(enemy)) {
-                this.handleBottleCollision(enemy, index);
+            if (enemy.spliceble) {
+                this.level.enemies.splice(index, 1);
+            } else {
+                if (this.character.isColliding(enemy)) {
+                    this.handleCharacterCollision(enemy, index);
+                } else if (this.bottles.length > 0 && this.bottles[0].isColliding(enemy)) {
+                    this.handleBottleCollision(enemy, index);
+                }
             }
         });
     }
@@ -242,9 +247,7 @@ class World {
         * @param {string} enemyId - The unique identifier of the enemy to be removed.
         */
     removeEnemy(index) {
-        setTimeout(() => {
-            this.level.enemies.splice(index, 1);
-        }, 1000);
+        this.level.enemies[index].startDead();
     }
 
     /**

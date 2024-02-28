@@ -8,6 +8,7 @@ class DrawableObject {
     width = 100;
     height = 150;
     imageCash = {};
+    allIntervals = [];
 
     /**
      * Draws the object on the canvas using its image.

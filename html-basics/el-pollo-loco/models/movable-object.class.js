@@ -42,6 +42,8 @@ class MovableObject extends DrawableObject {
      */
     lastHurt = 0;
 
+    spliceble = false;
+
     /**
      * Offset values for positioning the movable object within the game.
      */
@@ -140,5 +142,10 @@ class MovableObject extends DrawableObject {
         return this.energy === 0;
     }
 
+    startDead() {
+        setTimeout(() => {
+            this.spliceble = true;
+        }, 1000);
+    }
 
 }
