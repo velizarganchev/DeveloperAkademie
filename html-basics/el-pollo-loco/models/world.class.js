@@ -130,11 +130,11 @@ class World {
  * Checks collisions with enemies and handles corresponding actions.
  */
     checkEnemyCollisions() {
-        this.level.enemies.forEach((enemy) => {
+        this.level.enemies.forEach((enemy, index) => {
             if (this.character.isColliding(enemy)) {
-                this.handleCharacterCollision(enemy);
+                this.handleCharacterCollision(enemy, index);
             } else if (this.bottles.length > 0 && this.bottles[0].isColliding(enemy)) {
-                this.handleBottleCollision(enemy);
+                this.handleBottleCollision(enemy, index);
             }
         });
     }
@@ -143,11 +143,11 @@ class World {
      * Handles collision between the character and an enemy.
      * @param {Enemy} enemy - The enemy object involved in the collision.
      */
-    handleCharacterCollision(enemy) {
+    handleCharacterCollision(enemy, index) {
         if (!this.character.isAboveGround()) {
             this.handleCharacterGroundCollision();
         } else if (this.character.speedY < 0 && (enemy instanceof Chicken || enemy instanceof SmallChicken)) {
-            this.handleCharacterJumpCollision(enemy);
+            this.handleCharacterJumpCollision(enemy, index);
         }
     }
 
@@ -163,23 +163,23 @@ class World {
      * Handles collision between the character and an enemy during a jump.
      * @param {Enemy} enemy - The enemy object involved in the collision.
      */
-    handleCharacterJumpCollision(enemy) {
+    handleCharacterJumpCollision(enemy, index) {
         hurt_chicken_sound.play();
         enemy.dead();
         this.character.jump();
-        this.findAndRemoveEnemy(enemy.id);
+        this.removeEnemy(index);
     }
 
     /**
      * Handles collision between a bottle and an enemy.
      * @param {Enemy} enemy - The enemy object involved in the collision.
      */
-    handleBottleCollision(enemy) {
+    handleBottleCollision(enemy, index) {
         this.bottles[0].isCollidingWhithEnemy = true;
         if (enemy instanceof EndBoss) {
-            this.handleEndBossCollision(enemy);
+            this.handleEndBossCollision(enemy, index);
         } else {
-            this.handleRegularEnemyCollision(enemy);
+            this.handleRegularEnemyCollision(enemy, index);
         }
     }
 
@@ -187,10 +187,10 @@ class World {
      * Handles collision between a bottle and the end boss.
      * @param {EndBoss} endBoss - The end boss object involved in the collision.
      */
-    handleEndBossCollision(endBoss) {
+    handleEndBossCollision(endBoss, index) {
         if (endBoss.isDead()) {
             endBoss.dead();
-            this.findAndRemoveEnemy(endBoss.id);
+            this.removeEnemy(index);
         } else {
             this.healthEndBossStatusBar.setPercentage(endBoss.energy);
             endBoss.hit(25);
@@ -202,10 +202,10 @@ class World {
      * Handles collision between a bottle and a regular enemy.
      * @param {Enemy} enemy - The regular enemy object involved in the collision.
      */
-    handleRegularEnemyCollision(enemy) {
+    handleRegularEnemyCollision(enemy, index) {
         hurt_chicken_sound.play();
         enemy.dead();
-        this.findAndRemoveEnemy(enemy.id);
+        this.removeEnemy(index);
     }
 
 
@@ -237,17 +237,13 @@ class World {
         });
     }
 
-
-
-
     /**
-    * Finds and removes an enemy from the level based on the provided enemyId after a delay of 1000 milliseconds.
-    * @param {string} enemyId - The unique identifier of the enemy to be removed.
-    */
-    findAndRemoveEnemy(enemyId) {
+        * Removes an enemy from the level based on the provided enemyId after a delay of 1000 milliseconds.
+        * @param {string} enemyId - The unique identifier of the enemy to be removed.
+        */
+    removeEnemy(index) {
         setTimeout(() => {
-            let enemyToRemove = this.level.enemies.findIndex((e) => e.id === enemyId);
-            this.level.enemies.splice(enemyToRemove, 1);
+            this.level.enemies.splice(index, 1);
         }, 1000);
     }
 
