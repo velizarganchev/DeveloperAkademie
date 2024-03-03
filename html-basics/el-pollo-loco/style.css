@@ -7,16 +7,41 @@ body {
     height: 100vh;
     margin: 0;
     font-family: 'Zabars', 'Arial', 'Helvetica', 'sans-serif';
+}
+
+.mobile-messege {
+    display: none;
+    justify-content: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+}
+
+.mobile-messege h2 {
+    width: 100%;
+    text-align: center;
+    font-size: 4rem;
+    letter-spacing: 0.5rem;
+}
+
+.mobile-messege-img-container {
+    display: flex;
+    justify-content: center;
+}
+
+.mobile-messege-img-container img {
+    width: 50%;
+}
+
+.content-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-image: url('./img/5_background/desert.png');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-}
-
-.content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 .canvas-container {
@@ -150,7 +175,17 @@ canvas {
 h1 {
     font-size: 4.5rem;
     letter-spacing: 1rem;
-    margin-bottom: 80px;
+}
+
+@media only screen and (max-width: 730px) {
+
+    .content-container {
+        display: none;
+    }
+
+    .mobile-messege {
+        display: flex;
+    }
 }
 
 @media only screen and (max-width: 720px) {
@@ -172,7 +207,7 @@ h1 {
 
 @media only screen and (max-height: 480px) and (orientation: landscape) {
     h1 {
-        display: none;
+        display: none !important;
     }
 
     canvas,
@@ -194,4 +229,10 @@ h1 {
         display: none;
     }
 
+}
+
+@media only screen and (max-width: 380px) {
+    h2 {
+        font-size: 2.5rem !important;
+    }
 }
