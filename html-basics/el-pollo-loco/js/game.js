@@ -19,6 +19,8 @@ let keyboard = new Keyboard();
 
 let startGame = false;
 
+let fullScreen = false;
+
 /**
  * Initializes the game by obtaining the canvas element and creating a new world.
  */
@@ -48,56 +50,32 @@ function start() {
     startBtn.style.display = 'none';
 }
 
-/**
- * Event listener for handling keydown events and updating the corresponding properties in the keyboard object.
- * @param {KeyboardEvent} e - The keydown event object.
- */
-window.addEventListener('keydown', (e) => {
-    switch (e.code.toLowerCase()) {
-        case 'space':
-            keyboard.space = true;
-            break;
-        case 'arrowleft':
-            keyboard.arrowleft = true;
-            break;
-        case 'arrowright':
-            keyboard.arrowright = true;
-            break;
-        case 'arrowup':
-            keyboard.arrowup = true;
-            break;
-        case 'arrowdown':
-            keyboard.arrowdown = true;
-            break;
-        case 'keyd':
-            keyboard.keyd = true;
-            break;
-    }
-});
+function handleFullScreen() {
+    fullScreen = !fullScreen;
 
-/**
- * Event listener for handling keyup events and updating the corresponding properties in the keyboard object.
- * @param {KeyboardEvent} e - The keyup event object.
- */
-window.addEventListener('keyup', (e) => {
-    switch (e.code.toLowerCase()) {
-        case 'space':
-            keyboard.space = false;
-            break;
-        case 'arrowleft':
-            keyboard.arrowleft = false;
-            break;
-        case 'arrowright':
-            keyboard.arrowright = false;
-            break;
-        case 'arrowup':
-            keyboard.arrowup = false;
-            break;
-        case 'arrowdown':
-            keyboard.arrowdown = false;
-            break;
-        case 'keyd':
-            keyboard.keyd = false;
-            break;
+    let canvas = document.getElementById('canvas');
+    let startPage = document.getElementById('start-page-id');
+    let title = document.getElementById('title');
+
+    if (fullScreen) {
+        title.style.display = 'none';
+        canvas.style.width = '100vw';
+        canvas.style.height = '100vh';
+        canvas.style.backgroundSize = '100vw 100vh';
+        canvas.style.borderRadius = '0px'
+        startPage.style.width = '100vw';
+        startPage.style.height = '100vh';
+        startPage.style.borderRadius = '0px';
+    } else {
+        title.style.display = 'block';
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        canvas.style.borderRadius = '10px'
+        canvas.style.backgroundSize = '720px 480px';
+        startPage.style.width = '720px';
+        startPage.style.height = '480px';
+        startPage.style.borderRadius = '10px';
     }
-});
+
+}
+

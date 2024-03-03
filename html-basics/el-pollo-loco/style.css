@@ -46,6 +46,32 @@ canvas {
     flex-direction: row-reverse;
 }
 
+.control-btn-container {
+    display: none !important;
+    position: absolute;
+    top: 340px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.control-btn {
+    font-size: 40px;
+    margin-left: 5px;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    background-color: inherit;
+}
+
+.left-right-btn-container {
+    padding-left: 20px;
+}
+
+.jump-throw-btn-container {
+    padding-right: 20px;
+}
+
 /* Definiert eine Keyframe-Animation namens "moveButton" */
 @keyframes moveButton {
     0% {
@@ -151,8 +177,21 @@ h1 {
 
     canvas,
     .start-page {
-        width: 100%;
+        width: 100vw;
         height: 100vh;
         border-radius: 0px;
     }
+
+    canvas {
+        background-size: 100vw;
+    }
+
+    .control-btn-container {
+        display: flex !important;
+    }
+
+    .full-screen-btn {
+        display: none;
+    }
+
 }

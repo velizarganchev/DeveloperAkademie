@@ -12,7 +12,7 @@
 
 <body>
     <div class="content">
-        <h1>El Pollo Loco</h1>
+        <h1 id="title">El Pollo Loco</h1>
         <div class="canvas-container">
             <div class="start-page" id="start-page-id">
                 <button class="start-button" id="start-btn" onclick="start()">Start Game</button>
@@ -23,9 +23,27 @@
                     <button class="mute-btn" onclick="handleSound()" id="sound-btn">
                         <i class="fa-solid fa-volume-xmark"></i>
                     </button>
-                    <button class="full-screen-btn">
+                    <button class="full-screen-btn" onclick="handleFullScreen()">
                         <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
                     </button>
+                </div>
+                <div class="control-btn-container">
+                    <div class="left-right-btn-container">
+                        <button class="control-btn" id="btn-left">
+                            <i class="fa-regular fa-circle-left"></i>
+                        </button>
+                        <button class="control-btn" id="btn-right">
+                            <i class="fa-regular fa-circle-right"></i>
+                        </button>
+                    </div>
+                    <div class="jump-throw-btn-container">
+                        <button class="control-btn" id="btn-jump">
+                            <i class="fa-regular fa-circle-up"></i>
+                        </button>
+                        <button class="control-btn" id="btn-throw">
+                            <i class="fa-solid fa-wine-bottle"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
             <canvas id="canvas" width="720" height="480"></canvas>

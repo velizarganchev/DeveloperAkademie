@@ -80,10 +80,10 @@ class World {
     endGame() {
         if (this.endBoss.isDead() || this.character.isDead()) {
             this.gameOver = true;
+            level_sound.pause();
+            sleep_sound_character.pause();
+            endboss_start_walking.pause();
             setTimeout(() => {
-                level_sound.pause();
-                sleep_sound_character.pause();
-
                 if (this.character.isDead()) {
                     game_over_lost.play();
                 } else if (this.endBoss.isDead()) {
