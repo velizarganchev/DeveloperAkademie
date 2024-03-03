@@ -1,6 +1,10 @@
 const COLLISION_INTERVAL = 200;
 class World {
+    gameOver = false;
+    collision = new Collision();
     character = new Charcter();
+    endGameObject = new EndGameObject('img/9_intro_outro_screens/game_over/game over!.png');
+    endGameLostObject = new EndGameObject('img/9_intro_outro_screens/game_over/oh no you lost!.png');
     healthStatusBar = new StatusBarHealth();
     healthEndBossStatusBar = new StatusBarHealthEndBoss();
     coinsStatusBar = new StatusBarCoins();
@@ -27,7 +31,6 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
-        console.log();
     }
 
     /**
@@ -36,15 +39,25 @@ class World {
      */
     setWorld() {
         this.character.world = this;
+        this.collision.world = this;
     }
 
     /**
- * Main game loop that runs at regular intervals.
- * Handles collisions, checks for object throwing, and manages bottle timing.
- */
+    * Clears all JavaScript intervals currently running, ensuring a clean slate for new intervals.
+    * This method stops all intervals from running in the window, helping to manage and prevent conflicts.
+    */
+    clearAllIntervals() {
+        for (let i = 1; i < 999999; i++) window.clearInterval(i);
+    }
+
+    /**
+    * Main game loop that runs at regular intervals.
+    * Handles collisions, checks for object throwing, and manages bottle timing.
+    */
     run() {
         setInterval(() => {
-            this.checkCollisions(); // Check for collisions between objects
+            this.endGame();
+            this.collision.checkCollisions(); // Check for collisions between objects
 
             if (this.checkThrowObject()) {
                 // If the character is attempting to throw an object, add a new bottle
@@ -64,9 +77,27 @@ class World {
         }, COLLISION_INTERVAL); // Main loop interval
     }
 
+    endGame() {
+        if (this.endBoss.isDead() || this.character.isDead()) {
+            this.gameOver = true;
+            setTimeout(() => {
+                level_sound.pause();
+                sleep_sound_character.pause();
+
+                if (this.character.isDead()) {
+                    game_over_lost.play();
+                } else if (this.endBoss.isDead()) {
+                    game_over_win.play();
+                }
+
+                this.clearAllIntervals();
+            }, 500);
+        }
+    }
+
     /**
-  * Handles the first attack behavior of the end boss.
-  */
+    * Handles the first attack behavior of the end boss.
+    */
     handleFirstAttack() {
         this.endBoss.startWalking = false;
         this.endBoss.firstAttack = true;
@@ -119,130 +150,6 @@ class World {
     }
 
     /**
-     * Checks collisions with enemies, coins, and bottles, and handles corresponding actions.
-     */
-    checkCollisions() {
-        this.checkEnemyCollisions();
-        this.checkCoinCollisions();
-        this.checkBottleCollisions();
-    }
-
-    /**
- * Checks collisions with enemies and handles corresponding actions.
- */
-    checkEnemyCollisions() {
-        this.level.enemies.forEach((enemy, index) => {
-            if (enemy.spliceble) {
-                this.level.enemies.splice(index, 1);
-            } else {
-                if (this.character.isColliding(enemy)) {
-                    this.handleCharacterCollision(enemy, index);
-                } else if (this.bottles.length > 0 && this.bottles[0].isColliding(enemy)) {
-                    this.handleBottleCollision(enemy, index);
-                }
-            }
-        });
-    }
-
-    /**
-     * Handles collision between the character and an enemy.
-     * @param {Enemy} enemy - The enemy object involved in the collision.
-     */
-    handleCharacterCollision(enemy, index) {
-        if (!this.character.isAboveGround()) {
-            this.handleCharacterGroundCollision();
-        } else if (this.character.speedY < 0 && (enemy instanceof Chicken || enemy instanceof SmallChicken)) {
-            this.handleCharacterJumpCollision(enemy, index);
-        }
-    }
-
-    /**
-     * Handles collision between the character and the ground.
-     */
-    handleCharacterGroundCollision() {
-        this.character.hit(5);
-        this.healthStatusBar.setPercentage(this.character.energy);
-    }
-
-    /**
-     * Handles collision between the character and an enemy during a jump.
-     * @param {Enemy} enemy - The enemy object involved in the collision.
-     */
-    handleCharacterJumpCollision(enemy, index) {
-        hurt_chicken_sound.play();
-        enemy.dead();
-        this.character.jump();
-        this.removeEnemy(index);
-    }
-
-    /**
-     * Handles collision between a bottle and an enemy.
-     * @param {Enemy} enemy - The enemy object involved in the collision.
-     */
-    handleBottleCollision(enemy, index) {
-        this.bottles[0].isCollidingWhithEnemy = true;
-        if (enemy instanceof EndBoss) {
-            this.handleEndBossCollision(enemy, index);
-        } else {
-            this.handleRegularEnemyCollision(enemy, index);
-        }
-    }
-
-    /**
-     * Handles collision between a bottle and the end boss.
-     * @param {EndBoss} endBoss - The end boss object involved in the collision.
-     */
-    handleEndBossCollision(endBoss, index) {
-        if (endBoss.isDead()) {
-            endBoss.dead();
-            this.removeEnemy(index);
-        } else {
-            this.healthEndBossStatusBar.setPercentage(endBoss.energy);
-            endBoss.hit(25);
-            hurt_chicken_sound.play();
-        }
-    }
-
-    /**
-     * Handles collision between a bottle and a regular enemy.
-     * @param {Enemy} enemy - The regular enemy object involved in the collision.
-     */
-    handleRegularEnemyCollision(enemy, index) {
-        hurt_chicken_sound.play();
-        enemy.dead();
-        this.removeEnemy(index);
-    }
-
-
-    /**
-     * Checks collisions with coins and handles corresponding actions.
-     */
-    checkCoinCollisions() {
-        this.level.coins.forEach((coin) => {
-            if (this.character.isColliding(coin)) {
-                // If character collides with a coin, collect the coin
-                this.character.takeCoin(coin);
-                this.findAndRemoveCoin(coin.id);
-                this.coinsStatusBar.setPercentage(this.character.coins.length * 10);
-            }
-        });
-    }
-
-    /**
-     * Checks collisions with bottles and handles corresponding actions.
-     */
-    checkBottleCollisions() {
-        this.level.bottles.forEach((bottle) => {
-            if (this.character.isColliding(bottle)) {
-                // If character collides with a bottle, collect the bottle
-                this.character.takeBottle(bottle);
-                this.findAndRemoveBottle(bottle.id);
-                this.bottleStatusBar.setPercentage(this.character.bottles.length * 10);
-            }
-        });
-    }
-
-    /**
         * Removes an enemy from the level based on the provided enemyId after a delay of 1000 milliseconds.
         * @param {string} enemyId - The unique identifier of the enemy to be removed.
         */
@@ -275,8 +182,6 @@ class World {
     checkThrowObject() {
         return this.keyboard.keyd && this.character.bottles.length > 0 && this.canTrow;
     }
-
-
 
     /**
     * Reverses the direction of the object on the x-axis.
@@ -332,6 +237,20 @@ class World {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
 
+        if (this.gameOver || this.character.isDead()) {
+            this.drawGameOver();
+        } else {
+            this.drawGame();
+        }
+        this.ctx.translate(-this.camera_x, 0);
+
+        let self = this;
+        requestAnimationFrame(function () {
+            self.draw();
+        });
+    }
+
+    drawGame() {
         this.drawBackgrounds();
         this.drawStatusBars();
 
@@ -340,13 +259,17 @@ class World {
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.bottles);
+    }
 
+    drawGameOver() {
+        this.drawBackgrounds();
         this.ctx.translate(-this.camera_x, 0);
-
-        let self = this;
-        requestAnimationFrame(function () {
-            self.draw();
-        });
+        if (!this.character.isDead()) {
+            this.mapObj(this.endGameObject);
+        } else {
+            this.mapObj(this.endGameLostObject);
+        }
+        this.ctx.translate(this.camera_x, 0);
     }
 
     /**

@@ -71,8 +71,11 @@ class EndBoss extends MovableObject {
         this.endBossImagesInterval = setInterval(() => {
             if (this.isHurt()) {
                 this.animateImg(this.IMAGES_HURT);
+            } else if (this.isDead()) {
+                this.animateImg(this.IMAGES_DEAD);
             } else if (this.startWalking) {
                 endboss_start_walking.play();
+                endboss_start_walking.volume = 0.1;
                 this.moveLeft();
             } else if (this.firstAttack) {
                 this.attack();
@@ -110,6 +113,5 @@ class EndBoss extends MovableObject {
      */
     stopIntervals() {
         clearInterval(this.endBossImagesInterval);
-        // Additional cleanup if needed
     }
 }

@@ -93,7 +93,7 @@ class Charcter extends MovableObject {
     */
     animate() {
         // Interval for movement animation.
-        let chAnimateMoveInterval = setInterval(() => {
+        setInterval(() => {
             walking_sound_character.pause();
 
             if (this.canMoveRight()) {
@@ -110,13 +110,16 @@ class Charcter extends MovableObject {
         }, 1000 / 60);
 
         // Interval for image changes based on character actions.
-        let chAnimateImgInterval = setInterval(() => {
+        setInterval(() => {
             hurt_sound_character.pause();
+            hurt_sound_character.volume = 0.2;
             sleep_sound_character.pause();
             let waitTime = (new Date().getTime() - this.lastMovingTime) / 1000;
 
             if (this.isDead()) {
                 this.animateImg(this.IMAGES_DEAD);
+                level_sound.pause();
+                game_over_lost.play();
             } else if (this.isHurt()) {
                 hurt_sound_character.play();
                 this.animateImg(this.IMAGES_HURT);
@@ -133,6 +136,7 @@ class Charcter extends MovableObject {
                 }
             }
         }, 1000 / 10);
+
     }
 
     /**

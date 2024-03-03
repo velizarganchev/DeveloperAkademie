@@ -9,7 +9,6 @@ class Level {
      * X-coordinate indicating the end of the level.
      */
     level_end_x = 5100;
-    
     bottles;
     coins;
 
