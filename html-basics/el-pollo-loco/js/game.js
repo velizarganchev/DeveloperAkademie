@@ -50,6 +50,12 @@ function start() {
     startBtn.style.display = 'none';
 }
 
+function goToStartPage() {
+    startGame = false;
+    
+    init();
+}
+
 function handleFullScreen() {
     fullScreen = !fullScreen;
 
