@@ -1,7 +1,6 @@
 const start_page_sounds = new Audio('audio/music-start-page-elPolloLoco.mp3');
 const level_sound = new Audio('audio/music-levelOne-elPolloLoco.mp3');
-const game_over_win = new Audio('audio/game-over-win.mp3');
-const game_over_lost = new Audio('audio/game-over-lost.mp3');
+const game_over = new Audio('audio/game-over.mp3');
 const walking_sound_character = new Audio('audio/walking.mp3');
 const hurt_sound_character = new Audio('audio/hurt.mp3');
 const sleep_sound_character = new Audio('audio/sleep.mp3');

@@ -2,6 +2,7 @@ const COLLISION_INTERVAL = 200;
 class World {
     gameOver = false;
     collision = new Collision();
+    handleButtons = new HandleButtons();
     character = new Charcter();
     endGameObject = new EndGameObject('img/9_intro_outro_screens/game_over/game over!.png');
     endGameLostObject = new EndGameObject('img/9_intro_outro_screens/game_over/oh no you lost!.png');
@@ -83,13 +84,12 @@ class World {
             level_sound.pause();
             sleep_sound_character.pause();
             endboss_start_walking.pause();
-            setTimeout(() => {
-                if (this.character.isDead()) {
-                    game_over_lost.play();
-                } else if (this.endBoss.isDead()) {
-                    game_over_win.play();
-                }
 
+            if (this.character.isDead() || this.endBoss.isDead()) {
+                game_over.play();
+            }
+            
+            setTimeout(() => {
                 this.clearAllIntervals();
             }, 500);
         }
@@ -270,6 +270,7 @@ class World {
             this.mapObj(this.endGameLostObject);
         }
         this.ctx.translate(this.camera_x, 0);
+        this.handleButtons.showEndScreenButtons();
     }
 
     /**

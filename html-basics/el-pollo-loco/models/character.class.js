@@ -119,7 +119,6 @@ class Charcter extends MovableObject {
             if (this.isDead()) {
                 this.animateImg(this.IMAGES_DEAD);
                 level_sound.pause();
-                game_over_lost.play();
             } else if (this.isHurt()) {
                 hurt_sound_character.play();
                 this.animateImg(this.IMAGES_HURT);
