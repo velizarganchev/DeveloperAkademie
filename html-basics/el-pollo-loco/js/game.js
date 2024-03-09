@@ -18,8 +18,11 @@ let keyboard = new Keyboard();
 
 
 let startGame = false;
+let gameOver = false;
 
 let fullScreen = false;
+
+let sound = false;
 
 /**
  * Initializes the game by obtaining the canvas element and creating a new world.
@@ -28,6 +31,9 @@ function init() {
     canvas = document.getElementById('canvas');
     if (startGame) {
         world = new World(canvas, keyboard);
+        if (world && gameOver === true) {
+            world.resetGame();
+        }
         handleSound();
         level_sound.volume = 0.2;
     }
@@ -50,9 +56,9 @@ function start() {
     startBtn.style.display = 'none';
 }
 
-function goToStartPage() {
-    startGame = false;
-    
+function restartGame() {
+    startGame = true;
+    sound = false;
     init();
 }
 

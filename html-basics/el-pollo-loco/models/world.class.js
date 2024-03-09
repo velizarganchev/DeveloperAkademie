@@ -1,6 +1,5 @@
 const COLLISION_INTERVAL = 200;
 class World {
-    gameOver = false;
     collision = new Collision();
     handleButtons = new HandleButtons();
     character = new Charcter();
@@ -15,7 +14,7 @@ class World {
     ctx;
     canvas;
     keyboard;
-    level = levelOne;
+    level = LevelGenerator.generateLevel(5, 3, 10);
     endBoss = this.level.enemies.find(e => e instanceof EndBoss);
     camera_x = 0;
 
@@ -78,9 +77,14 @@ class World {
         }, COLLISION_INTERVAL); // Main loop interval
     }
 
+    resetGame() {
+        game_over.pause();
+        gameOver = false;
+    }
+
     endGame() {
         if (this.endBoss.isDead() || this.character.isDead()) {
-            this.gameOver = true;
+            gameOver = true;
             level_sound.pause();
             sleep_sound_character.pause();
             endboss_start_walking.pause();
@@ -88,7 +92,7 @@ class World {
             if (this.character.isDead() || this.endBoss.isDead()) {
                 game_over.play();
             }
-            
+
             setTimeout(() => {
                 this.clearAllIntervals();
             }, 500);
@@ -237,10 +241,11 @@ class World {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
 
-        if (this.gameOver || this.character.isDead()) {
+        if (gameOver || this.character.isDead()) {
             this.drawGameOver();
         } else {
             this.drawGame();
+            this.handleButtons.hideEndScreenButtons();
         }
         this.ctx.translate(-this.camera_x, 0);
 
