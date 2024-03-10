@@ -3,8 +3,8 @@ class World {
     collision = new Collision();
     handleButtons = new HandleButtons();
     character = new Charcter();
-    endGameObject = new EndGameObject('img/9_intro_outro_screens/game_over/game over!.png');
-    endGameLostObject = new EndGameObject('img/9_intro_outro_screens/game_over/oh no you lost!.png');
+    endGameObject = new GameObject('img/9_intro_outro_screens/game_over/game over!.png');
+    endGameLostObject = new GameObject('img/9_intro_outro_screens/game_over/oh no you lost!.png');
     healthStatusBar = new StatusBarHealth();
     healthEndBossStatusBar = new StatusBarHealthEndBoss();
     coinsStatusBar = new StatusBarCoins();
@@ -77,11 +77,18 @@ class World {
         }, COLLISION_INTERVAL); // Main loop interval
     }
 
+    /**
+ * Resets the game state by pausing the game over sound and resetting the game over flag.
+ */
     resetGame() {
         game_over.pause();
         gameOver = false;
     }
 
+    /**
+     * Checks for the end of the game based on the status of the character and end boss.
+     * If either the character or end boss is dead, triggers the game over state.
+     */
     endGame() {
         if (this.endBoss.isDead() || this.character.isDead()) {
             gameOver = true;
@@ -90,14 +97,17 @@ class World {
             endboss_start_walking.pause();
 
             if (this.character.isDead() || this.endBoss.isDead()) {
+                gameOver = true;
                 game_over.play();
             }
 
+            // Clear all intervals after a delay of 500 milliseconds
             setTimeout(() => {
                 this.clearAllIntervals();
             }, 500);
         }
     }
+
 
     /**
     * Handles the first attack behavior of the end boss.
@@ -133,7 +143,7 @@ class World {
      */
     throwBottle() {
         if (this.canTrow) {
-            let bottle = new ThrowableObject(this.character.x, this.character.y);
+            let bottle = new ThrowableObject(this.character.x, this.character.y, this.character.otherDirection);
             this.canTrow = false; // Disable throwing temporarily
             this.bottles.push(bottle);
             this.character.bottles.pop(); // Reduce the character's bottle count
@@ -235,16 +245,18 @@ class World {
     }
 
     /**
-     * Draws the entire scene on the canvas, including backgrounds, status bars, characters, and objects.
-     */
+  * Draws the entire game scene on the canvas, including backgrounds, status bars, characters, and objects.
+  */
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
 
-        if (gameOver || this.character.isDead()) {
+        if (gameOver) {
             this.drawGameOver();
-        } else {
+        } else if (!gameOver && !startPage) {
             this.drawGame();
+            this.handleButtons.hideEndScreenButtons();
+        } else {
             this.handleButtons.hideEndScreenButtons();
         }
         this.ctx.translate(-this.camera_x, 0);
@@ -255,6 +267,9 @@ class World {
         });
     }
 
+    /**
+     * Draws the game elements during regular gameplay, including backgrounds, status bars, characters, and objects.
+     */
     drawGame() {
         this.drawBackgrounds();
         this.drawStatusBars();
@@ -266,6 +281,9 @@ class World {
         this.addObjectsToMap(this.bottles);
     }
 
+    /**
+     * Draws the game over screen, including backgrounds and appropriate end game images.
+     */
     drawGameOver() {
         this.drawBackgrounds();
         this.ctx.translate(-this.camera_x, 0);

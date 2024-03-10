@@ -1,36 +1,34 @@
-/**
- * Reference to the HTML canvas element.
- * @type {HTMLCanvasElement}
- */
+// Konstanten für die IDs der HTML-Elemente
+const CANVAS_ID = 'canvas';
+const START_BTN_ID = 'start-btn';
+const START_PAGE_ID = 'start-page-id';
+const TITLE_ID = 'title';
+
+// Referenz auf das HTML-Canvas-Element
 let canvas;
 
-/**
- * Reference to the game world instance.
- * @type {World}
- */
+// Referenz auf die Spielweltinstanz
 let world;
 
-/**
- * Keyboard object to handle user input.
- * @type {Keyboard}
- */
+// Keyboard-Objekt zur Handhabung der Benutzereingabe
 let keyboard = new Keyboard();
 
-
+// Flags für den Spielstatus
 let startGame = false;
 let gameOver = false;
-
+let startPage = false;
 let fullScreen = false;
-
 let sound = false;
+let showInfo = false;
 
 /**
- * Initializes the game by obtaining the canvas element and creating a new world.
+ * Initialisiert das Spiel durch Abrufen des Canvas-Elements und Erstellen einer neuen Welt.
  */
-function init() {
-    canvas = document.getElementById('canvas');
+function initializeGame() {
+    canvas = document.getElementById(CANVAS_ID);
+
+    world = new World(canvas, keyboard);
     if (startGame) {
-        world = new World(canvas, keyboard);
         if (world && gameOver === true) {
             world.resetGame();
         }
@@ -40,34 +38,70 @@ function init() {
 }
 
 /**
- * Initiates the game by hiding the start page and performing initialization.
+ * Startet das Spiel, indem die Startseite ausgeblendet und die Initialisierung durchgeführt wird.
  */
 function start() {
-    // Retrieve the HTML element with the ID 'start-page-id'
-    let startBtn = document.getElementById('start-btn');
+    // HTML-Element mit der ID 'start-btn' abrufen
+    let startBtn = document.getElementById(START_BTN_ID);
 
-    // Declaration and initialization of the variable startGame
+    // Deklaration und Initialisierung der Variable startGame
     startGame = true;
+    startPage = false;
+    // Initialisierungsfunktion aufrufen
+    initializeGame();
 
-    // Call the initialization function
-    init();
-
-    // Hide the start page
+    // Startseite ausblenden
     startBtn.style.display = 'none';
 }
 
+/**
+ * Startet das Spiel neu, indem Flags zurückgesetzt und die Initialisierung aufgerufen wird.
+ */
 function restartGame() {
     startGame = true;
     sound = false;
-    init();
+    initializeGame();
 }
 
+/**
+ * Wechselt zur Startseite zurück, setzt Flags zurück und zeigt den Startknopf an.
+ */
+function goToStartPage() {
+    let startButton = document.getElementById(START_BTN_ID);
+    game_over.pause();
+
+    startGame = false;
+    gameOver = false;
+    startPage = true;
+
+    startButton.style.display = 'block';
+
+    sound = true;
+    handleSound();
+}
+
+function handleInfo() {
+    showInfo = !showInfo;
+    let info = document.getElementById('info-div');
+
+    if (showInfo) {
+        info.style.display = 'block';
+    } else {
+        info.style.display = 'none';
+    }
+}
+
+/**
+ * Behandelt den Wechsel in den Vollbildmodus.
+ */
 function handleFullScreen() {
+    // Lokale Variable für den Vollbildmodus umschalten
     fullScreen = !fullScreen;
 
-    let canvas = document.getElementById('canvas');
-    let startPage = document.getElementById('start-page-id');
-    let title = document.getElementById('title');
+    // Elemente abrufen
+    let canvas = document.getElementById(CANVAS_ID);
+    let startPage = document.getElementById(START_PAGE_ID);
+    let title = document.getElementById(TITLE_ID);
 
     if (fullScreen) {
         title.style.display = 'none';
@@ -88,6 +122,4 @@ function handleFullScreen() {
         startPage.style.height = '480px';
         startPage.style.borderRadius = '10px';
     }
-
 }
-

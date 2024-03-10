@@ -165,6 +165,23 @@ canvas {
   transform: scale(1.2);
 }
 
+.info-container{
+  display: none;
+  position: absolute;
+  top: 10%;
+  right: 1%;
+  width: 167px;
+  background-color: #ff9600;
+  padding: 15px;
+  border: 1px black solid;
+  border-radius: 10px;
+}
+
+.info-container p{
+  font-size: 19px;
+  margin: 5px 0px;
+}
+
 .start-button:hover {
   background-color: #e4ecec;
   color: #ff9600;
