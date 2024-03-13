@@ -1,6 +1,6 @@
 const COLLISION_INTERVAL = 200;
 class World {
-    gameOver = false;
+    gameOver;
     collision = new Collision();
     handleButtons = new HandleButtons();
     character = new Charcter();
@@ -25,10 +25,11 @@ class World {
     * @param {HTMLCanvasElement} canvas - The canvas element.
     * @param {Keyboard} keyboard - The keyboard input handler.
     */
-    constructor(canvas, keyboard) {
+    constructor(canvas, keyboard, gameOver) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.gameOver = gameOver;
         this.draw();
         this.setWorld();
         this.run();
@@ -78,20 +79,16 @@ class World {
         }, COLLISION_INTERVAL); // Main loop interval
     }
 
+
     endGame() {
         if (this.endBoss.isDead() || this.character.isDead()) {
             this.gameOver = true;
             level_sound.pause();
             sleep_sound_character.pause();
             endboss_start_walking.pause();
+            game_over.play();
 
-            if (this.character.isDead() || this.endBoss.isDead()) {
-                game_over.play();
-            }
-            
-            setTimeout(() => {
-                this.clearAllIntervals();
-            }, 500);
+            this.clearAllIntervals();
         }
     }
 

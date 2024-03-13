@@ -26,7 +26,7 @@ const coins = Array.from({ length: 10 }, () => new Coin());
 
 
 
-const levelOne = new Level(
+let levelOne = new Level(
     cloudLayers,
     [ //!!!!!!!!!!!
         new BackgroundObject('img/5_background/layers/air.png', -719),

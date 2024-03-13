@@ -16,8 +16,9 @@ let world;
  */
 let keyboard = new Keyboard();
 
-
 let startGame = false;
+let gameOver = false;
+let resetGame = false;
 
 let fullScreen = false;
 
@@ -27,9 +28,11 @@ let fullScreen = false;
 function init() {
     canvas = document.getElementById('canvas');
     if (startGame) {
-        world = new World(canvas, keyboard);
-        handleSound();
-        level_sound.volume = 0.2;
+        world = new World(canvas, keyboard, gameOver);
+        if (world) {
+            handleSound();
+            level_sound.volume = 0.2;
+        }
     }
 }
 
@@ -50,10 +53,11 @@ function start() {
     startBtn.style.display = 'none';
 }
 
-function goToStartPage() {
-    startGame = false;
-    
-    init();
+function restartGame() {
+    gameOver = false;
+    startGame = true;
+
+    start();
 }
 
 function handleFullScreen() {

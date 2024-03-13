@@ -54,6 +54,5 @@ class Chicken extends MovableObject {
     stopIntervals() {
         clearInterval(this.walking);
         clearInterval(this.move);
-        // Sound
     }
 }

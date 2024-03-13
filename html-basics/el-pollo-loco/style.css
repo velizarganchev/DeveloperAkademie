@@ -74,8 +74,7 @@ canvas {
 .control-btn-container {
   display: none !important;
   position: absolute;
-  top: 340px;
-  display: flex;
+  top: 310px;
   justify-content: space-between;
   width: 100%;
 }
@@ -87,14 +86,6 @@ canvas {
   border: none;
   cursor: pointer;
   background-color: inherit;
-}
-
-.left-right-btn-container {
-  padding-left: 20px;
-}
-
-.jump-throw-btn-container {
-  padding-right: 20px;
 }
 
 /* Definiert eine Keyframe-Animation namens "moveButton" */
@@ -200,7 +191,7 @@ h1 {
   cursor: pointer;
 }
 
-@media only screen and (max-width: 730px) {
+@media only screen and (max-width: 666px) {
   .content-container {
     display: none;
   }
@@ -223,6 +214,10 @@ h1 {
 
   canvas {
     width: 100%;
+  }
+
+  .start-button {
+    font-size: 25px;
   }
 }
 
@@ -257,6 +252,30 @@ h1 {
   .start-button {
     top: 5%;
     left: 38%;
+  }
+}
+
+@media (min-width: 740px) and (max-width: 843px) and (orientation: landscape) {
+  .control-btn-container{
+    top: 300px;
+  }
+}
+
+@media (min-width: 844px) and (max-width: 895px) and (orientation: landscape) {
+  .control-btn-container{
+    top: 330px;
+  }
+}
+
+@media (min-width: 896px) and (max-width: 931px) and (orientation: landscape) {
+  .control-btn-container{
+    top: 350px;
+  }
+}
+
+@media (min-width: 932px) and (max-width: 1000px) and (orientation: landscape) {
+  .control-btn-container{
+    top: 365px;
   }
 }
 
