@@ -9,6 +9,7 @@ class ThrowableObject extends MovableObject {
     isCollidingWhithEnemy = false;
     width = 80;
     height = 80;
+    direction;
     /**
      * Collection of images representing the rotation of the throwable object.
      */
@@ -41,12 +42,13 @@ class ThrowableObject extends MovableObject {
      * @param {number} x - The initial x-coordinate of the throwable object.
      * @param {number} y - The initial y-coordinate of the throwable object.
      */
-    constructor(x, y) {
+    constructor(x, y, direction) {
         super().loadImage(this.IMAGES_ROTATION[0]);
         this.loadImages(this.IMAGES_ROTATION);
         this.loadImages(this.IMAGES_SPLASH);
         this.x = x;
         this.y = y;
+        this.direction = direction;
         this.trow();
     }
 
@@ -58,7 +60,11 @@ class ThrowableObject extends MovableObject {
         this.applyGravity();
 
         let moveInterval = setInterval(() => {
-            this.x += 10;
+            if (!this.direction) {
+                this.x += 7;
+            } else {
+                this.x -= 7;
+            }
         }, 25);
 
         let trowBottleInterval = setInterval(() => {

@@ -14,7 +14,7 @@
     <div class="mobile-messege">
         <h2>Please rotate your Device</h2>
         <div class="mobile-messege-img-container">
-            <img src="/img/5_background/rotate-icon.png" alt="Rotate Divice">
+            <img src="./img/5_background/rotate-icon.png" alt="Rotate Divice">
         </div>
     </div>
     <div class="content-container">
@@ -23,7 +23,7 @@
             <div class="start-page" id="start-page-id">
                 <button class="start-button" id="start-btn" onclick="start()">Start Game</button>
                 <div class="icons-container" id="icons">
-                    <button class="info-btn">
+                    <button class="info-btn" onclick="handleInfo()">
                         <i class="fa-solid fa-gamepad"></i>
                     </button>
                     <button class="mute-btn" onclick="handleSound()" id="sound-btn">
@@ -32,6 +32,12 @@
                     <button class="full-screen-btn" onclick="handleFullScreen()">
                         <i class="fa-solid fa-up-right-and-down-left-from-center"></i>
                     </button>
+                </div>
+                <div class="info-container" id="info-div">
+                    <p>Left-Key = Move Left</p>
+                    <p>Right-Key = Move Right</p>
+                    <p>Space-Bar Or Up-Key = Jump</p>
+                    <p>D-Key = Throw Bottle</p>
                 </div>
                 <div class="control-btn-container">
                     <div class="left-right-btn-container">
