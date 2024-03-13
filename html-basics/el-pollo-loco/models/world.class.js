@@ -1,5 +1,6 @@
 const COLLISION_INTERVAL = 200;
 class World {
+    gameOver = false;
     collision = new Collision();
     handleButtons = new HandleButtons();
     character = new Charcter();
@@ -24,11 +25,10 @@ class World {
     * @param {HTMLCanvasElement} canvas - The canvas element.
     * @param {Keyboard} keyboard - The keyboard input handler.
     */
-    constructor(canvas, keyboard, gameOver) {
+    constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
-        this.gameOver = gameOver;
         this.draw();
         this.setWorld();
         this.run();
@@ -90,12 +90,21 @@ class World {
      * Checks for the end of the game based on the status of the character and end boss.
      * If either the character or end boss is dead, triggers the game over state.
      */
+
     endGame() {
         if (this.endBoss.isDead() || this.character.isDead()) {
             gameOver = true;
             level_sound.pause();
             sleep_sound_character.pause();
             endboss_start_walking.pause();
+
+            if (this.character.isDead() || this.endBoss.isDead()) {
+                game_over.play();
+            }
+            
+            setTimeout(() => {
+                this.clearAllIntervals();
+            }, 500);
             game_over.play();
 
             if (this.character.isDead() || this.endBoss.isDead()) {
