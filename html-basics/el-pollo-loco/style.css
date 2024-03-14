@@ -74,8 +74,7 @@ canvas {
 .control-btn-container {
   display: none !important;
   position: absolute;
-  top: 340px;
-  display: flex;
+  top: 310px;
   justify-content: space-between;
   width: 100%;
 }
@@ -87,14 +86,6 @@ canvas {
   border: none;
   cursor: pointer;
   background-color: inherit;
-}
-
-.left-right-btn-container {
-  padding-left: 20px;
-}
-
-.jump-throw-btn-container {
-  padding-right: 20px;
 }
 
 /* Definiert eine Keyframe-Animation namens "moveButton" */
@@ -115,6 +106,7 @@ canvas {
 
 /* Definiert eine Keyframe-Animation namens "scaleButton" */
 @keyframes scaleButton {
+
   0%,
   100% {
     transform: scale(1);
@@ -165,7 +157,7 @@ canvas {
   transform: scale(1.2);
 }
 
-.info-container{
+.info-container {
   display: none;
   position: absolute;
   top: 10%;
@@ -177,7 +169,7 @@ canvas {
   border-radius: 10px;
 }
 
-.info-container p{
+.info-container p {
   font-size: 19px;
   margin: 5px 0px;
 }
@@ -217,7 +209,7 @@ h1 {
   cursor: pointer;
 }
 
-@media only screen and (max-width: 660px) {
+@media only screen and (max-width: 666px) {
   .content-container {
     display: none;
   }
@@ -227,7 +219,7 @@ h1 {
   }
 }
 
-@media only screen and (max-width: 720px) {
+@media only screen and (max-width: 720px) and (orientation:portrait) {
   .canvas-container {
     width: 100%;
     justify-content: center;
@@ -241,9 +233,20 @@ h1 {
   canvas {
     width: 100%;
   }
+
+  .start-button {
+    font-size: 25px;
+  }
+
+  .icons-container {
+    padding: 25px;
+  }
+  .endscreen-btn-container {
+    top: 475px;
+  }
 }
 
-@media only screen and (max-height: 480px) and (orientation: landscape) {
+@media only screen and (max-height: 480px) and (orientation:landscape) {
   h1 {
     display: none !important;
   }
@@ -268,12 +271,50 @@ h1 {
   }
 
   .endscreen-btn-container {
-    top: 325px;
+    top: 305px;
   }
 
   .start-button {
     top: 5%;
     left: 38%;
+  }
+}
+
+@media only screen and (min-width: 667px) and (max-width: 739px) and (max-height: 376px) and (orientation:landscape) {
+  .endscreen-btn-container {
+    top: 295px;
+  }
+}
+
+@media only screen and (min-width: 740px) and (max-width: 843px) and (max-height: 390px) and (orientation:landscape) {
+  .control-btn-container {
+    top: 300px;
+  }
+
+  .endscreen-btn-container {
+    top: 285px;
+  }
+}
+
+@media only screen and (min-width: 844px) and (max-width: 895px) and (orientation:landscape) {
+  .control-btn-container {
+    top: 330px;
+  }
+}
+
+@media only screen and (min-width: 896px) and (max-width: 931px) and (orientation:landscape) {
+  .control-btn-container {
+    top: 350px;
+  }
+}
+
+@media only screen and (min-width: 932px) and (max-width: 1000px) and (max-height: 431px) and (orientation:landscape) {
+  .control-btn-container {
+    top: 365px;
+  }
+
+  .endscreen-btn-container {
+    top: 340px;
   }
 }
 

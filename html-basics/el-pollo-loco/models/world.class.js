@@ -105,6 +105,7 @@ class World {
             setTimeout(() => {
                 this.clearAllIntervals();
             }, 500);
+            
             game_over.play();
 
             if (this.character.isDead() || this.endBoss.isDead()) {
