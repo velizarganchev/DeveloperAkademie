@@ -16,8 +16,9 @@ const endboss_start_walking = new Audio('audio/endboss-start-walking.mp3');
  */
 function handleSound() {
     sound = !sound;
-    let soundBtn = document.getElementById('sound-btn');
+    localStorage.setItem('sound', JSON.stringify(sound));
 
+    let soundBtn = document.getElementById('sound-btn');
     if (sound) {
         // Spielt den passenden Sound je nach Spielstatus ab
         if (!startGame) {

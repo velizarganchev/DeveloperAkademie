@@ -26,11 +26,12 @@ let showInfo = false;
  */
 function initializeGame() {
     canvas = document.getElementById(CANVAS_ID);
-
     world = new World(canvas, keyboard);
+
     if (startGame) {
         if (world && gameOver === true) {
             world.resetGame();
+            sound = !JSON.parse(localStorage.getItem('sound'));
         }
         handleSound();
         level_sound.volume = 0.2;
@@ -47,6 +48,9 @@ function start() {
     // Deklaration und Initialisierung der Variable startGame
     startGame = true;
     startPage = false;
+    sound = false;
+    start_page_sounds.pause();
+
     // Initialisierungsfunktion aufrufen
     initializeGame();
 
