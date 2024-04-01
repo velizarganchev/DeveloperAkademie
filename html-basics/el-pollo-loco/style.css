@@ -241,6 +241,7 @@ h1 {
   .icons-container {
     padding: 25px;
   }
+
   .endscreen-btn-container {
     top: 475px;
   }
@@ -278,7 +279,11 @@ h1 {
     top: 5%;
     left: 38%;
   }
+  .control-btn-container {
+    top: 308px;
+  }
 }
+
 
 @media only screen and (min-width: 667px) and (max-width: 739px) and (max-height: 376px) and (orientation:landscape) {
   .endscreen-btn-container {
@@ -288,7 +293,7 @@ h1 {
 
 @media only screen and (min-width: 740px) and (max-width: 843px) and (max-height: 390px) and (orientation:landscape) {
   .control-btn-container {
-    top: 300px;
+    top: 292px;
   }
 
   .endscreen-btn-container {
@@ -298,19 +303,19 @@ h1 {
 
 @media only screen and (min-width: 844px) and (max-width: 895px) and (orientation:landscape) {
   .control-btn-container {
-    top: 330px;
+    top: 323px;
   }
 }
 
 @media only screen and (min-width: 896px) and (max-width: 931px) and (orientation:landscape) {
   .control-btn-container {
-    top: 350px;
+    top: 344px;
   }
 }
 
 @media only screen and (min-width: 932px) and (max-width: 1000px) and (max-height: 431px) and (orientation:landscape) {
   .control-btn-container {
-    top: 365px;
+    top: 360px;
   }
 
   .endscreen-btn-container {

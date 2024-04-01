@@ -8,6 +8,9 @@ import { NoteListComponent } from './note-list/note-list.component';
 import { NoteComponent } from './note-list/note/note.component';
 import { FormsModule } from '@angular/forms';
 import { AddNoteDialogComponent } from './add-note-dialog/add-note-dialog.component';
+import { environment } from '../environments/environment';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 
 @NgModule({
@@ -23,6 +26,8 @@ import { AddNoteDialogComponent } from './add-note-dialog/add-note-dialog.compon
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
   ],
   providers: [],
   bootstrap: [AppComponent]

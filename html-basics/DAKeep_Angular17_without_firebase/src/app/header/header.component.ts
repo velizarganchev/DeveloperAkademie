@@ -10,6 +10,4 @@ export class HeaderComponent {
   @Output() openNoteChange: EventEmitter<boolean> = new EventEmitter();
 
   hoveredAddBtn = false;
-
-
 }
